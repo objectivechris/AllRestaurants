@@ -30,7 +30,7 @@ struct NoLocationAccess: View {
                     .padding(10)
                     .frame(minWidth: 0, maxWidth: .infinity)
             }
-            .background(Color.green)
+            .background(Color("AllGreen", bundle: nil))
             .cornerRadius(4)
             .padding([.horizontal], 20)
             

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -8,27 +8,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Restaurant View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RestaurantViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" estimatedRowHeight="96" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bmx-fh-1lI">
-                                <rect key="frame" x="0.0" y="184" width="414" height="712"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="c46-IE-yyz"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="2gu-At-xQ6"/>
-                                </connections>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODj-KR-rbU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="184"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODj-KR-rbU" userLabel="Nav Bar View">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="194"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navbar-logo" translatesAutoresizingMaskIntoConstraints="NO" id="2N2-kl-BuZ">
-                                        <rect key="frame" x="79.5" y="52" width="255" height="52"/>
+                                        <rect key="frame" x="67.666666666666686" y="52" width="255" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="6CO-2R-w1r"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="255" id="Y1h-Fz-xc5"/>
@@ -41,21 +33,58 @@
                                     <constraint firstItem="2N2-kl-BuZ" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="topMargin" id="p0p-cr-L0d"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlF-zj-tRi">
+                                <rect key="frame" x="0.0" y="202" width="390" height="642"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" estimatedRowHeight="96" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bmx-fh-1lI">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="642"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="c46-IE-yyz"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="2gu-At-xQ6"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="bmx-fh-1lI" firstAttribute="leading" secondItem="BlF-zj-tRi" secondAttribute="leading" id="EnR-ax-trj"/>
+                                    <constraint firstAttribute="trailing" secondItem="bmx-fh-1lI" secondAttribute="trailing" id="chN-u7-6uF"/>
+                                    <constraint firstItem="bmx-fh-1lI" firstAttribute="top" secondItem="BlF-zj-tRi" secondAttribute="top" id="grl-39-n7N"/>
+                                    <constraint firstAttribute="bottom" secondItem="bmx-fh-1lI" secondAttribute="bottom" id="yIH-Ox-hGG"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4H-0D-eJZ" customClass="FloatingButton" customModule="AllRestaurants" customModuleProvider="target">
+                                <rect key="frame" x="145" y="758" width="100" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="1bj-dF-Hro"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="l2e-aj-0rI"/>
+                                </constraints>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="0.0"/>
+                                    <color key="baseBackgroundColor" name="AllGreen"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="ODj-KR-rbU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0KA-Pb-exZ"/>
-                            <constraint firstItem="bmx-fh-1lI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="0uh-y1-o9v"/>
-                            <constraint firstItem="bmx-fh-1lI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2ky-40-hcg"/>
-                            <constraint firstAttribute="bottom" secondItem="bmx-fh-1lI" secondAttribute="bottom" id="C13-d1-eGS"/>
-                            <constraint firstItem="bmx-fh-1lI" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="bottom" id="dVw-C9-tvN"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bmx-fh-1lI" secondAttribute="trailing" id="eDb-IT-CMX"/>
+                            <constraint firstAttribute="bottom" secondItem="BlF-zj-tRi" secondAttribute="bottom" id="OHh-oG-Edm"/>
+                            <constraint firstItem="BlF-zj-tRi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OS3-c9-pG1"/>
+                            <constraint firstItem="K4H-0D-eJZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RxX-YA-8ti"/>
+                            <constraint firstItem="ODj-KR-rbU" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.23" id="U1l-25-nfE"/>
+                            <constraint firstItem="BlF-zj-tRi" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="bottom" constant="8" id="X5X-00-472"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ODj-KR-rbU" secondAttribute="trailing" id="eJo-gb-Yrj"/>
                             <constraint firstItem="ODj-KR-rbU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="le1-IB-2td"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="K4H-0D-eJZ" secondAttribute="bottom" constant="10" id="qqF-2s-3X0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BlF-zj-tRi" secondAttribute="trailing" id="wIs-PA-KoO"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="BlF-zj-tRi" id="zXF-Ro-Zac"/>
+                        <outlet property="floatingButton" destination="K4H-0D-eJZ" id="HG7-fg-n0Q"/>
                         <outlet property="tableView" destination="bmx-fh-1lI" id="wKI-jV-Ru7"/>
                     </connections>
                 </viewController>
@@ -66,6 +95,9 @@
     </scenes>
     <resources>
         <image name="navbar-logo" width="255" height="52"/>
+        <namedColor name="AllGreen">
+            <color red="0.25900000333786011" green="0.54100000858306885" blue="0.075000002980232239" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

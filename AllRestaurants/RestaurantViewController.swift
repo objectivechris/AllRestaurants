@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RestaurantViewController.swift
 //  AllRestaurants
 //
 //  Created by Chris Rene on 12/3/21.
@@ -10,19 +10,23 @@ import CoreLocation
 import UIKit
 import SwiftUI
 
-class ViewController: UIViewController {
+private let identifier = "RestaurantCell"
+
+class RestaurantViewController: UIViewController {
 
     enum Section: CaseIterable {
         case restaurants
     }
     
+    @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var floatingButton: FloatingButton!
     
     private var locationManager: CLLocationManager?
     private var dataSource: UITableViewDiffableDataSource<Section, Restaurant>!
     private var cancelleables = Set<AnyCancellable>()
     
-    var activityIndicator: UIActivityIndicatorView = {
+    private var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
         view.hidesWhenStopped = true
         return view
@@ -38,7 +42,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "RestaurantCell", bundle: nil), forCellReuseIdentifier: "RestaurantCell")
+        tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
         
         configureDataSource()
         
@@ -50,7 +54,7 @@ class ViewController: UIViewController {
     
     private func configureDataSource() {
         dataSource = UITableViewDiffableDataSource<Section, Restaurant>(tableView: tableView) { tableView, indexPath, restaurant in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! RestaurantCell
             cell.configure(with: RestaurantViewModel(restaurant: restaurant))
             return cell
         }
@@ -96,7 +100,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension RestaurantViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .notDetermined: manager.requestWhenInUseAuthorization()

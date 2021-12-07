@@ -30,7 +30,7 @@ struct StarRating: View {
             }
             .mask(stars)
         )
-        .foregroundColor(.gray)
+        .foregroundColor(Color(uiColor: UIColor.systemGray4))
     }
 }
 
