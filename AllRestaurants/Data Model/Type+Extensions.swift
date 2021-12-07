@@ -1,5 +1,5 @@
 //
-//  Numbers+Extension.swift
+//  Type+Extensions.swift
 //  AllRestaurants
 //
 //  Created by Chris Rene on 12/6/21.
@@ -7,6 +7,8 @@
 
 import Foundation
 import CoreGraphics
+import UIKit
+import SwiftUI
 
 extension BinaryInteger {
     var degreesToRadians: CGFloat { CGFloat(self) * .pi / 180 }
@@ -37,4 +39,12 @@ extension Int {
 
         return String(self)
     }
+}
+
+extension UIColor {
+    static var allTrailsGreen = UIColor(named: "AllGreen")!
+}
+
+extension Color {
+    static var allTrailsGreen = Color(UIColor.allTrailsGreen)
 }

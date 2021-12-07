@@ -13,7 +13,7 @@ enum ButtonStyle {
     var configuration: UIButton.Configuration {
         var style = UIButton.Configuration.plain()
         style.baseForegroundColor = .white
-        style.background.backgroundColor = UIColor(named: "AllGreen")!
+        style.background.backgroundColor = .allTrailsGreen
         return style
     }
     
@@ -30,7 +30,7 @@ enum ButtonStyle {
     var image: UIImage {
         switch self {
         case .map: return UIImage(named: "map-icon")!
-        case .list: return UIImage(named: "pin-icon")!
+        case .list: return UIImage(named: "list-icon")!
         }
     }
 }

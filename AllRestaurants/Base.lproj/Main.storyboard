@@ -34,24 +34,8 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlF-zj-tRi">
-                                <rect key="frame" x="0.0" y="202" width="390" height="642"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" estimatedRowHeight="96" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bmx-fh-1lI">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="642"/>
-                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="c46-IE-yyz"/>
-                                            <outlet property="delegate" destination="BYZ-38-t0r" id="2gu-At-xQ6"/>
-                                        </connections>
-                                    </tableView>
-                                </subviews>
+                                <rect key="frame" x="0.0" y="194" width="390" height="650"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="bmx-fh-1lI" firstAttribute="leading" secondItem="BlF-zj-tRi" secondAttribute="leading" id="EnR-ax-trj"/>
-                                    <constraint firstAttribute="trailing" secondItem="bmx-fh-1lI" secondAttribute="trailing" id="chN-u7-6uF"/>
-                                    <constraint firstItem="bmx-fh-1lI" firstAttribute="top" secondItem="BlF-zj-tRi" secondAttribute="top" id="grl-39-n7N"/>
-                                    <constraint firstAttribute="bottom" secondItem="bmx-fh-1lI" secondAttribute="bottom" id="yIH-Ox-hGG"/>
-                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4H-0D-eJZ" customClass="FloatingButton" customModule="AllRestaurants" customModuleProvider="target">
                                 <rect key="frame" x="145" y="758" width="100" height="42"/>
@@ -65,6 +49,9 @@
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="0.0"/>
                                     <color key="baseBackgroundColor" name="AllGreen"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="toggleViewWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iWf-do-LD4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -75,7 +62,7 @@
                             <constraint firstItem="BlF-zj-tRi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OS3-c9-pG1"/>
                             <constraint firstItem="K4H-0D-eJZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RxX-YA-8ti"/>
                             <constraint firstItem="ODj-KR-rbU" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.23" id="U1l-25-nfE"/>
-                            <constraint firstItem="BlF-zj-tRi" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="bottom" constant="8" id="X5X-00-472"/>
+                            <constraint firstItem="BlF-zj-tRi" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="bottom" id="X5X-00-472"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ODj-KR-rbU" secondAttribute="trailing" id="eJo-gb-Yrj"/>
                             <constraint firstItem="ODj-KR-rbU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="le1-IB-2td"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="K4H-0D-eJZ" secondAttribute="bottom" constant="10" id="qqF-2s-3X0"/>
@@ -85,12 +72,53 @@
                     <connections>
                         <outlet property="containerView" destination="BlF-zj-tRi" id="zXF-Ro-Zac"/>
                         <outlet property="floatingButton" destination="K4H-0D-eJZ" id="HG7-fg-n0Q"/>
-                        <outlet property="tableView" destination="bmx-fh-1lI" id="wKI-jV-Ru7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="90" y="99"/>
+        </scene>
+        <!--Restaurant Table View Controller-->
+        <scene sceneID="Cd6-4F-VKI">
+            <objects>
+                <viewController storyboardIdentifier="RestaurantTableViewController" id="HQv-hi-bxS" customClass="RestaurantTableViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yLT-tt-HjR">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" estimatedRowHeight="96" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vma-an-OkX">
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="iHf-8N-TEL"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Qd7-N5-WiB"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9Of-H3-dJe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="vma-an-OkX" secondAttribute="bottom" id="ENZ-JD-Cqi"/>
+                            <constraint firstAttribute="trailing" secondItem="vma-an-OkX" secondAttribute="trailing" id="NKh-77-YTl"/>
+                            <constraint firstItem="vma-an-OkX" firstAttribute="leading" secondItem="9Of-H3-dJe" secondAttribute="leading" id="e5V-Do-4xf"/>
+                            <constraint firstItem="vma-an-OkX" firstAttribute="top" secondItem="9Of-H3-dJe" secondAttribute="top" id="u8u-gU-hQS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="vma-an-OkX" id="w5o-Yu-lGT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="la3-WM-Ay8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="803" y="99"/>
+        </scene>
+        <!--Restaurant Map View Controller-->
+        <scene sceneID="O80-uz-Jpe">
+            <objects>
+                <hostingController storyboardIdentifier="RestaurantMapViewController" id="Y1X-U7-dd9" customClass="RestaurantMapViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hP7-dB-Mas" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1491" y="99"/>
         </scene>
     </scenes>
     <resources>

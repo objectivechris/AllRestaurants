@@ -1,8 +1,8 @@
 //
-//  RestaurantViewController.swift
+//  RestaurantTableViewController.swift
 //  AllRestaurants
 //
-//  Created by Chris Rene on 12/3/21.
+//  Created by Chris Rene on 12/7/21.
 //
 
 import Combine
@@ -12,15 +12,13 @@ import SwiftUI
 
 private let identifier = "RestaurantCell"
 
-class RestaurantViewController: UIViewController {
+class RestaurantTableViewController: UIViewController {
 
     enum Section: CaseIterable {
         case restaurants
     }
     
-    @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var floatingButton: FloatingButton!
     
     private var locationManager: CLLocationManager?
     private var dataSource: UITableViewDiffableDataSource<Section, Restaurant>!
@@ -31,7 +29,7 @@ class RestaurantViewController: UIViewController {
         view.hidesWhenStopped = true
         return view
     }()
-        
+    
     private(set) var restaurants = [Restaurant]() {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -42,6 +40,7 @@ class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
         
         configureDataSource()
@@ -50,6 +49,11 @@ class RestaurantViewController: UIViewController {
         locationManager?.delegate = self
         locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager?.requestWhenInUseAuthorization()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
     }
     
     private func configureDataSource() {
@@ -87,7 +91,7 @@ class RestaurantViewController: UIViewController {
             }
             .store(in: &cancelleables)
     }
-    
+
     private func showAlert(title: String = "Uh Oh", message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -100,7 +104,7 @@ class RestaurantViewController: UIViewController {
     }
 }
 
-extension RestaurantViewController: CLLocationManagerDelegate {
+extension RestaurantTableViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .notDetermined: manager.requestWhenInUseAuthorization()

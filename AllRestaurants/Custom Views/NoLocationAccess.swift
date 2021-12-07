@@ -35,6 +35,7 @@ struct NoLocationAccess: View {
             .padding([.horizontal], 20)
             
             Spacer()
+            Spacer()
         }
     }
     
