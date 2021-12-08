@@ -10,7 +10,7 @@ import CoreLocation
 import UIKit
 import SwiftUI
 
-private let identifier = "RestaurantCell"
+private let cellIdentifier = "RestaurantCell"
 
 class RestaurantTableViewController: UIViewController {
 
@@ -22,7 +22,7 @@ class RestaurantTableViewController: UIViewController {
     
     private var locationManager: CLLocationManager?
     private var dataSource: UITableViewDiffableDataSource<Section, Restaurant>!
-    private var cancelleables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     
     private var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
@@ -41,7 +41,7 @@ class RestaurantTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
+        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
         configureDataSource()
         
@@ -58,7 +58,7 @@ class RestaurantTableViewController: UIViewController {
     
     private func configureDataSource() {
         dataSource = UITableViewDiffableDataSource<Section, Restaurant>(tableView: tableView) { tableView, indexPath, restaurant in
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! RestaurantCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantCell
             cell.configure(with: RestaurantViewModel(restaurant: restaurant))
             return cell
         }
@@ -87,9 +87,8 @@ class RestaurantTableViewController: UIViewController {
                 self?.activityIndicator.stopAnimating()
             } receiveValue: { [weak self] restaurants in
                 self?.restaurants = restaurants
-                print(restaurants)
             }
-            .store(in: &cancelleables)
+            .store(in: &cancellables)
     }
 
     private func showAlert(title: String = "Uh Oh", message: String) {

@@ -10,7 +10,6 @@ import SwiftUI
 
 let storyboardIdentifier = "Main"
 let tableVCIdentifier = "RestaurantTableViewController"
-let mapVCIdentifier = "RestaurantMapViewController"
 
 class RestaurantViewController: UIViewController {
     
@@ -25,8 +24,7 @@ class RestaurantViewController: UIViewController {
     }()
     
     lazy var mapViewController: RestaurantMapViewController = {
-        let storyboard = UIStoryboard(name: storyboardIdentifier, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: mapVCIdentifier) as! RestaurantMapViewController
+        let viewController = RestaurantMapViewController(tableViewController.restaurants)
         self.addChildVC(viewController)
         return viewController
     }()

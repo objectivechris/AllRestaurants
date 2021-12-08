@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Restaurants: Decodable {
     let results: [Restaurant]
 }
 
-struct Restaurant: Decodable, Hashable {
+struct Restaurant: Decodable, Hashable, Identifiable {
+    let id = UUID()
     let name: String
     let priceLevel: Int
     let rating: Double
@@ -51,5 +53,9 @@ extension Restaurant {
         self.rating = try container.decodeIfPresent(Double.self, forKey: .rating) ?? 0
         self.userRatingsTotal = try container.decodeIfPresent(Int.self, forKey: .userRatingsTotal) ?? 0
         self.location = try container.decodeIfPresent(Geometry.self, forKey: .geometry)?.location ?? Coordinates(lat: 0, lng: 0)
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
     }
 }

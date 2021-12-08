@@ -15,14 +15,12 @@ class RestaurantViewModel {
     let priceLevel: String
     let starRating: Double
     let reviewCount: Int
-//    let address: String
     let imageURL: URL
-//    let distance: String
     
     private let restaurant: Restaurant
     
     lazy var distance: String = {
-        return String(format: "%.1f", distanceInMiles(from: restaurant.location)) + "mi"
+        return String(format: "%.1f", distanceInMiles(from: restaurant.coordinate)) + "mi"
     }()
     
     init(restaurant: Restaurant) {
@@ -35,10 +33,9 @@ class RestaurantViewModel {
         imageURL = URL(string: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png")!
     }
     
-    func distanceInMiles(from coordinates: Restaurant.Coordinates) -> Double {
+    func distanceInMiles(from coordinate: CLLocationCoordinate2D) -> Double {
         guard let currentLocation = CLLocationManager().location else { return 0.0 }
-        let restaurantLocation = CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lng)
-        return distance(from: currentLocation.coordinate, coordinate2: restaurantLocation)
+        return distance(from: currentLocation.coordinate, coordinate2: coordinate)
     }
     
     // Modified helper method from StackOverflow

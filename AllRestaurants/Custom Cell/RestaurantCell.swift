@@ -20,12 +20,13 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    func configure(with model: RestaurantViewModel) {
+    func configure(with model: RestaurantViewModel, isMapPin: Bool = false) {
         nameLabel.text = model.name
         placeImageView.image = UIImage(named: "resty")!
         reviewCountLabel.text = "(\(model.reviewCount.abbreviated))"
         priceLevelLabel.text = "\(model.priceLevel)"
         statusLabel.text = model.distance
+        favoriteButton.isHidden = isMapPin
 //        tempImageView.load(url: Endpoint.weatherIcon(model.icon).url!, placeholder: nil, cache: nil)
         
         let controller = UIHostingController(rootView: StarRating(rating: model.starRating))
@@ -49,7 +50,7 @@ class RestaurantCell: UITableViewCell {
         super.init(coder: coder)
         
         backgroundColor = .clear
-        contentView.backgroundColor = .systemGray6
+        contentView.backgroundColor = .clear
         contentView.layer.cornerRadius = 12
     }
 }

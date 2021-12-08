@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D01FBCAC2760DE7100F49161 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */; };
 		D03D469E275F960900903545 /* NoLocationAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D469D275F960900903545 /* NoLocationAccess.swift */; };
 		D0670481275B21AC002A3A9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0670480275B21AC002A3A9B /* AppDelegate.swift */; };
 		D0670483275B21AC002A3A9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0670482275B21AC002A3A9B /* SceneDelegate.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
 		D03D469D275F960900903545 /* NoLocationAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLocationAccess.swift; sourceTree = "<group>"; };
 		D067047D275B21AC002A3A9B /* AllRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0670480275B21AC002A3A9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			children = (
 				D06704BE275B379F002A3A9B /* Restaurant.swift */,
 				D0D95B65275EC43E00EA60C6 /* Type+Extensions.swift */,
+				D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				D0670481275B21AC002A3A9B /* AppDelegate.swift in Sources */,
 				D03D469E275F960900903545 /* NoLocationAccess.swift in Sources */,
 				D06704B4275B26CF002A3A9B /* PlacesError.swift in Sources */,
+				D01FBCAC2760DE7100F49161 /* RestaurantAnnotation.swift in Sources */,
 				D07D005F275FF2B60067920C /* RestaurantMapViewController.swift in Sources */,
 				D0670483275B21AC002A3A9B /* SceneDelegate.swift in Sources */,
 				D0D95B66275EC43E00EA60C6 /* Type+Extensions.swift in Sources */,
