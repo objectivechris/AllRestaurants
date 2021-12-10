@@ -15,6 +15,7 @@ Run on Xcode 13, iOS 15, device or simulator
 - Added custom annotation to try and match design
 - Added some SwiftUI for easy view building
 - Added unit tests
+- Also designed an cool icon 😎
 
 ## Developed By
 Chris Rene
