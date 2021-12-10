@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		D01FBCAC2760DE7100F49161 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */; };
+		D02F3AEE2763F87E00B2CA66 /* NearbySearch.json in Sources */ = {isa = PBXBuildFile; fileRef = D02F3AED2763F87E00B2CA66 /* NearbySearch.json */; };
+		D02F3AF02763F8AE00B2CA66 /* TextSearch.json in Sources */ = {isa = PBXBuildFile; fileRef = D02F3AEF2763F8AE00B2CA66 /* TextSearch.json */; };
+		D02F3AF12763FC3100B2CA66 /* NearbySearch.json in Resources */ = {isa = PBXBuildFile; fileRef = D02F3AED2763F87E00B2CA66 /* NearbySearch.json */; };
+		D02F3AF22763FC3600B2CA66 /* TextSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = D02F3AEF2763F8AE00B2CA66 /* TextSearch.json */; };
 		D03D469E275F960900903545 /* NoLocationAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D469D275F960900903545 /* NoLocationAccess.swift */; };
 		D056F11527623C4200ACC359 /* NoResultsFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056F11427623C4200ACC359 /* NoResultsFound.swift */; };
 		D0670481275B21AC002A3A9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0670480275B21AC002A3A9B /* AppDelegate.swift */; };
@@ -16,7 +20,7 @@
 		D0670488275B21AC002A3A9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0670486275B21AC002A3A9B /* Main.storyboard */; };
 		D067048D275B21AD002A3A9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D067048C275B21AD002A3A9B /* Assets.xcassets */; };
 		D0670490275B21AD002A3A9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D067048E275B21AD002A3A9B /* LaunchScreen.storyboard */; };
-		D067049B275B21AD002A3A9B /* AllRestaurantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067049A275B21AD002A3A9B /* AllRestaurantsTests.swift */; };
+		D067049B275B21AD002A3A9B /* RestaurantsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067049A275B21AD002A3A9B /* RestaurantsViewModelTests.swift */; };
 		D06704A5275B21AD002A3A9B /* AllRestaurantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06704A4275B21AD002A3A9B /* AllRestaurantsUITests.swift */; };
 		D06704A7275B21AD002A3A9B /* AllRestaurantsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06704A6275B21AD002A3A9B /* AllRestaurantsUITestsLaunchTests.swift */; };
 		D06704B6275B2703002A3A9B /* PlacesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06704B5275B2703002A3A9B /* PlacesAPI.swift */; };
@@ -50,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
+		D02F3AED2763F87E00B2CA66 /* NearbySearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NearbySearch.json; sourceTree = "<group>"; };
+		D02F3AEF2763F8AE00B2CA66 /* TextSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TextSearch.json; sourceTree = "<group>"; };
 		D03D469D275F960900903545 /* NoLocationAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLocationAccess.swift; sourceTree = "<group>"; };
 		D056F11427623C4200ACC359 /* NoResultsFound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsFound.swift; sourceTree = "<group>"; };
 		D067047D275B21AC002A3A9B /* AllRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +67,7 @@
 		D067048F275B21AD002A3A9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0670491275B21AD002A3A9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0670496275B21AD002A3A9B /* AllRestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllRestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D067049A275B21AD002A3A9B /* AllRestaurantsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRestaurantsTests.swift; sourceTree = "<group>"; };
+		D067049A275B21AD002A3A9B /* RestaurantsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModelTests.swift; sourceTree = "<group>"; };
 		D06704A0275B21AD002A3A9B /* AllRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D06704A4275B21AD002A3A9B /* AllRestaurantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRestaurantsUITests.swift; sourceTree = "<group>"; };
 		D06704A6275B21AD002A3A9B /* AllRestaurantsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRestaurantsUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -136,6 +142,8 @@
 				D067048C275B21AD002A3A9B /* Assets.xcassets */,
 				D067048E275B21AD002A3A9B /* LaunchScreen.storyboard */,
 				D0670491275B21AD002A3A9B /* Info.plist */,
+				D02F3AED2763F87E00B2CA66 /* NearbySearch.json */,
+				D02F3AEF2763F8AE00B2CA66 /* TextSearch.json */,
 			);
 			path = AllRestaurants;
 			sourceTree = "<group>";
@@ -143,7 +151,7 @@
 		D0670499275B21AD002A3A9B /* AllRestaurantsTests */ = {
 			isa = PBXGroup;
 			children = (
-				D067049A275B21AD002A3A9B /* AllRestaurantsTests.swift */,
+				D067049A275B21AD002A3A9B /* RestaurantsViewModelTests.swift */,
 			);
 			path = AllRestaurantsTests;
 			sourceTree = "<group>";
@@ -274,6 +282,7 @@
 				TargetAttributes = {
 					D067047C275B21AC002A3A9B = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 					D0670495275B21AD002A3A9B = {
 						CreatedOnToolsVersion = 13.1;
@@ -321,6 +330,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02F3AF22763FC3600B2CA66 /* TextSearch.json in Resources */,
+				D02F3AF12763FC3100B2CA66 /* NearbySearch.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,10 +351,12 @@
 			files = (
 				D0AFEA5E275D69A100231FDA /* RestaurantCell.swift in Sources */,
 				D09AE9A3275FF13500AB118B /* RestaurantTableViewController.swift in Sources */,
+				D02F3AF02763F8AE00B2CA66 /* TextSearch.json in Sources */,
 				D0670485275B21AC002A3A9B /* RestaurantViewController.swift in Sources */,
 				D09AE981275FB2EA00AB118B /* FloatingButton.swift in Sources */,
 				D06704BB275B27F9002A3A9B /* StarRating.swift in Sources */,
 				D056F11527623C4200ACC359 /* NoResultsFound.swift in Sources */,
+				D02F3AEE2763F87E00B2CA66 /* NearbySearch.json in Sources */,
 				D0670481275B21AC002A3A9B /* AppDelegate.swift in Sources */,
 				D03D469E275F960900903545 /* NoLocationAccess.swift in Sources */,
 				D01FBCAC2760DE7100F49161 /* RestaurantAnnotation.swift in Sources */,
@@ -360,7 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D067049B275B21AD002A3A9B /* AllRestaurantsTests.swift in Sources */,
+				D067049B275B21AD002A3A9B /* RestaurantsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L282C3DF98;
@@ -549,6 +563,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.objectivechris.AllRestaurants;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -559,6 +574,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L282C3DF98;

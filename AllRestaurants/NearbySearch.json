@@ -1,0 +1,53 @@
+{
+    "business_status": "OPERATIONAL",
+    "geometry": {
+        "location": {
+            "lat": 37.3526971,
+            "lng": -121.9568574
+        },
+        "viewport": {
+            "northeast": {
+                "lat": 37.35392142989272,
+                "lng": -121.9554581701073
+            },
+            "southwest": {
+                "lat": 37.35122177010728,
+                "lng": -121.9581578298928
+            }
+        }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+    "icon_background_color": "#FF9E67",
+    "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+    "name": "Denny's",
+    "opening_hours": {
+        "open_now": true
+    },
+    "photos": [
+        {
+        "height": 2448,
+        "html_attributions": [
+                              "<a href=\"https://maps.google.com/maps/contrib/111270633585645659802\">Genevieve Lingat</a>"
+                              ],
+        "photo_reference": "Aap_uEDifCTMnDxRdbOO6XraGN2XzEKkME6vWskteEqQ3fC1HUmM0FArtpssG2ZYQan5xpixGVEBKneCKNZXD8uZ4wm_dz6Wr7Yb41U_nrB7c_JjswJm2nlGI2FyCNKhvuj4uPx8_1_objkVC30qUAB866oWaqo1Cj4Q2CP8DkGn7YsbzueO",
+        "width": 3264
+        }
+    ],
+    "place_id": "ChIJSYh6NE_Kj4ARtPe6qUMxW2I",
+    "plus_code": {
+        "compound_code": "923V+37 Santa Clara, California",
+        "global_code": "849W923V+37"
+    },
+    "price_level": 1,
+    "rating": 4.1,
+    "reference": "ChIJSYh6NE_Kj4ARtPe6qUMxW2I",
+    "scope": "GOOGLE",
+    "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "user_ratings_total": 1154,
+    "vicinity": "1745 El Camino Real, Santa Clara"
+}

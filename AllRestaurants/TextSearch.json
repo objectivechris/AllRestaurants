@@ -1,0 +1,55 @@
+
+{
+    "business_status": "OPERATIONAL",
+    "formatted_address": "4880 Lower Roswell Rd #155, Marietta, GA 30068",
+    "geometry": {
+        "location": {
+            "lat": 33.9653623,
+            "lng": -84.41077299999999
+        },
+        "viewport": {
+            "northeast": {
+                "lat": 33.96684397989272,
+                "lng": -84.40937502010728
+            },
+            "southwest": {
+                "lat": 33.96414432010727,
+                "lng": -84.41207467989273
+            }
+        }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+    "icon_background_color": "#FF9E67",
+    "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+    "name": "Johnny's New York Style Pizza",
+    "opening_hours": {
+        "open_now": true
+    },
+    "photos": [
+        {
+        "height": 3755,
+        "html_attributions": [
+                              "<a href=\"https://maps.google.com/maps/contrib/116562078219137526296\">Johnny&#39;s Pizza</a>"
+                              ],
+        "photo_reference": "Aap_uEAVITGkc_Fu974Oew9KnrcK2b8-vLyQx0t0ggRNzb2-6P6WWuIVld3rxDJeiMrjPdHnbhOiTxVpa4jDUwvun6EykvkNk140xpvvkyIhdUOwkNNWEtMMZAKGbVLWmQ-h8KP1DkgQfQRcdsGJt0oGNlcbpwhjffdEwVY4AVGZqgqZIDCY",
+        "width": 5632
+        }
+    ],
+    "place_id": "ChIJ6TUMxbsN9YgRpf2GW_xBZOo",
+    "plus_code": {
+        "compound_code": "XH8Q+4M Marietta, Georgia",
+        "global_code": "865QXH8Q+4M"
+    },
+    "price_level": 2,
+    "rating": 4.3,
+    "reference": "ChIJ6TUMxbsN9YgRpf2GW_xBZOo",
+    "types": [
+        "meal_delivery",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "user_ratings_total": 188
+}
