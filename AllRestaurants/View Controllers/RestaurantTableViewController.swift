@@ -5,7 +5,6 @@
 //  Created by Chris Rene on 12/7/21.
 //
 
-import Combine
 import CoreLocation
 import UIKit
 import SwiftUI
@@ -34,7 +33,7 @@ class RestaurantTableViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var cancellables = Set<AnyCancellable>()
+    // Diffable data 
     private var dataSource: UITableViewDiffableDataSource<Section, Restaurant>?
     private(set) var restaurants = [Restaurant]() {
         didSet {
@@ -81,6 +80,7 @@ class RestaurantTableViewController: UIViewController {
     }
 }
 
+// MARK: - RestaurantSearchObserver
 extension RestaurantTableViewController: RestaurantSearchObserver {
     
     func didReceiveRestaurants(_ restaurants: [Restaurant]) {

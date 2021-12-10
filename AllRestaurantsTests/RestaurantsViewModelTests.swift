@@ -50,7 +50,7 @@ class RestaurantsViewModelTests: XCTestCase {
 }
 
 
-extension XCTestCase {
+private extension XCTestCase {
     enum TestError: Error {
         case fileNotFound
         case unableToDecode

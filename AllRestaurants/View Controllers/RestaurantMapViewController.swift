@@ -34,6 +34,7 @@ class RestaurantMapViewController: UIViewController {
     }
 }
 
+// MARK: - Map View Delegate
 extension RestaurantMapViewController: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -74,6 +75,7 @@ extension RestaurantMapViewController: MKMapViewDelegate {
         }
     }
     
+    // Update current selected pin view
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         view.image = .staticPin
         for subview in view.subviews {
@@ -87,6 +89,7 @@ extension RestaurantMapViewController: MKMapViewDelegate {
     }
 }
 
+// MARK: - RestaurantSearchObserver
 extension RestaurantMapViewController: RestaurantSearchObserver {
     
     func didReceiveRestaurants(_ restaurants: [Restaurant]) {

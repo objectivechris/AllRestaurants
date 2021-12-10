@@ -36,8 +36,12 @@ class RestaurantViewController: UIViewController {
     }()
     
     private var state: String? = ""
+    
+    // Observers & Subscriptions
     private var cancellables = Set<AnyCancellable>()
     private var observations = [ObjectIdentifier: Observation]()
+    
+    // Location properties
     private var locationManager: CLLocationManager?
     private lazy var geocoder = CLGeocoder()
     private var authorizationDenied: Bool = false
@@ -79,6 +83,7 @@ class RestaurantViewController: UIViewController {
         childVC.didMove(toParent: self)
     }
     
+    // Subscribe to the searchText for downstream values
     private func setupBindings() {
         $searchText
             .debounce(for: 0.5, scheduler: RunLoop.main)
@@ -112,6 +117,7 @@ class RestaurantViewController: UIViewController {
         
         let coordinates = location.coordinate
 
+        // Subscribe to the search publisher and notify observers
         PlacesAPI().fetchNearbyRestaurants(latitude: "\(coordinates.latitude)", longitude: "\(coordinates.longitude)")
             .receive(on: DispatchQueue.main)
             .sink { _  in
@@ -129,6 +135,7 @@ class RestaurantViewController: UIViewController {
         
         let coordinates = location.coordinate
         
+        // Subscribe to the search publisher and notify observers
         PlacesAPI().search(withText: text, latitude: "\(coordinates.latitude)", longitude: "\(coordinates.longitude)")
             .receive(on: DispatchQueue.main)
             .sink { _  in
@@ -153,6 +160,7 @@ class RestaurantViewController: UIViewController {
     }
 }
 
+// MARK: - LocationManagerDelegate
 extension RestaurantViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
@@ -188,6 +196,7 @@ extension RestaurantViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension RestaurantViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText
@@ -225,6 +234,7 @@ protocol RestaurantSearchObserver: AnyObject {
     func locationAccessDenied(_ isDenied: Bool)
 }
 
+// Optional Methods
 extension RestaurantSearchObserver {
     func didReceiveRestaurants(_ restaurants: [Restaurant]) {}
     func didNotReceiveResults(forText text: String) {}

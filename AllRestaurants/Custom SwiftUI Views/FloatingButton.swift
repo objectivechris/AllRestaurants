@@ -54,6 +54,7 @@ class FloatingButton: UIButton {
         layer.masksToBounds = false
     }
     
+    // New way to custom buttons in iOS 15
     override func updateConfiguration() {
         guard let configuration = configuration else { return }
         

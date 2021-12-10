@@ -36,6 +36,7 @@ enum Endpoint {
 
 class PlacesAPI {
     
+    // Publishers using Combine
     func fetchNearbyRestaurants(latitude: String, longitude: String) -> AnyPublisher<[Restaurant], Error> {
         let url = Endpoint.nearbyPlaces(latitude, longitude).url
         
