@@ -18,16 +18,15 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var reviewCountLabel: UILabel!
     @IBOutlet weak var priceLevelLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var favoriteButton: UIButton!
     
-    func configure(with model: RestaurantViewModel, isMapPin: Bool = false) {
+    func configure(with model: RestaurantViewModel) {
         nameLabel.text = model.name
         placeImageView.image = UIImage(named: "resty")!
         reviewCountLabel.text = "(\(model.reviewCount.abbreviated))"
         priceLevelLabel.text = "\(model.priceLevel)"
         statusLabel.text = model.distance
-        favoriteButton.isHidden = isMapPin
-//        tempImageView.load(url: Endpoint.weatherIcon(model.icon).url!, placeholder: nil, cache: nil)
+        placeImageView.load(url: Endpoint.photo(model.photoId).url, placeholder: nil, cache: nil)
+        placeImageView.layer.cornerRadius = placeImageView.frame.width / 2
         
         let controller = UIHostingController(rootView: StarRating(rating: model.starRating))
         controller.view.translatesAutoresizingMaskIntoConstraints = false

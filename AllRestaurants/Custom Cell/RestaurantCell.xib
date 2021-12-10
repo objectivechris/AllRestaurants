@@ -29,7 +29,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFg-1p-Kea">
-                        <rect key="frame" x="117" y="16" width="88" height="19.5"/>
+                        <rect key="frame" x="117" y="16" width="187" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -76,29 +76,18 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-c4-uWw">
-                        <rect key="frame" x="258" y="16" width="30" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="30" id="pet-zi-NLa"/>
-                            <constraint firstAttribute="height" constant="30" id="z5b-N4-ahh"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="favorite"/>
-                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="cFg-1p-Kea" secondAttribute="trailing" id="3g4-ie-YhN"/>
                     <constraint firstItem="blI-gf-uND" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="5Z1-G7-AEE"/>
                     <constraint firstAttribute="trailing" secondItem="blI-gf-uND" secondAttribute="trailing" constant="24" id="Frc-N9-Fif"/>
                     <constraint firstItem="tvi-yJ-Vnr" firstAttribute="leading" secondItem="Bdr-p1-p1V" secondAttribute="leading" id="LJN-YM-68D"/>
                     <constraint firstItem="Uhe-R0-232" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lfk-0z-hQM"/>
-                    <constraint firstItem="wfM-c4-uWw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cFg-1p-Kea" secondAttribute="trailing" constant="53" id="PV3-qJ-9xQ"/>
                     <constraint firstAttribute="bottom" secondItem="blI-gf-uND" secondAttribute="bottom" constant="4" id="PvS-rs-F1O"/>
                     <constraint firstItem="blI-gf-uND" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="QNS-2p-bQR"/>
                     <constraint firstItem="cFg-1p-Kea" firstAttribute="leading" secondItem="Uhe-R0-232" secondAttribute="trailing" constant="13" id="ZDw-fn-q2W"/>
                     <constraint firstItem="tvi-yJ-Vnr" firstAttribute="top" secondItem="Bdr-p1-p1V" secondAttribute="bottom" constant="4" id="aCO-fd-94e"/>
-                    <constraint firstItem="blI-gf-uND" firstAttribute="trailing" secondItem="wfM-c4-uWw" secondAttribute="trailing" constant="8" id="ehS-d8-A2N"/>
                     <constraint firstItem="cFg-1p-Kea" firstAttribute="top" secondItem="Uhe-R0-232" secondAttribute="top" id="iJc-U5-SJ1"/>
-                    <constraint firstItem="wfM-c4-uWw" firstAttribute="top" secondItem="cFg-1p-Kea" secondAttribute="top" id="lea-E1-MuZ"/>
                     <constraint firstItem="Uhe-R0-232" firstAttribute="leading" secondItem="blI-gf-uND" secondAttribute="leading" constant="16" id="snT-nO-rcK"/>
                     <constraint firstItem="Bdr-p1-p1V" firstAttribute="leading" secondItem="cFg-1p-Kea" secondAttribute="leading" id="tf9-dL-v6d"/>
                     <constraint firstItem="Bdr-p1-p1V" firstAttribute="top" secondItem="cFg-1p-Kea" secondAttribute="bottom" constant="3.5" id="ujW-eA-OyD"/>
@@ -107,7 +96,6 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="containerView" destination="blI-gf-uND" id="ERl-Mz-2Eh"/>
-                <outlet property="favoriteButton" destination="wfM-c4-uWw" id="XSU-iZ-Zeb"/>
                 <outlet property="nameLabel" destination="cFg-1p-Kea" id="12d-qq-FEa"/>
                 <outlet property="placeImageView" destination="Uhe-R0-232" id="U5J-Lc-G3B"/>
                 <outlet property="priceLevelLabel" destination="T7d-aC-Hcj" id="J9T-S4-tMJ"/>
@@ -119,7 +107,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="favorite" width="22" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

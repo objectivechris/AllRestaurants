@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,24 +14,36 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="RestaurantViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODj-KR-rbU" userLabel="Nav Bar View">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="194"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODj-KR-rbU" userLabel="Search Bar View">
+                                <rect key="frame" x="0.0" y="0.0" width="391" height="161"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navbar-logo" translatesAutoresizingMaskIntoConstraints="NO" id="2N2-kl-BuZ">
-                                        <rect key="frame" x="67.666666666666686" y="52" width="255" height="52"/>
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for a restaurant" translatesAutoresizingMaskIntoConstraints="NO" id="888-Fw-X1g">
+                                        <rect key="frame" x="16" y="102" width="343" height="51"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="6CO-2R-w1r"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="255" id="Y1h-Fz-xc5"/>
+                                            <constraint firstAttribute="height" constant="51" id="cEP-gE-ezw"/>
+                                        </constraints>
+                                        <color key="tintColor" name="AllGreen"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                    </searchBar>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navbar-logo" translatesAutoresizingMaskIntoConstraints="NO" id="5ua-To-baj">
+                                        <rect key="frame" x="68" y="50" width="255" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="OtO-7S-Mp2"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES" header="YES"/>
+                                </accessibility>
                                 <constraints>
-                                    <constraint firstItem="2N2-kl-BuZ" firstAttribute="centerX" secondItem="ODj-KR-rbU" secondAttribute="centerX" id="daa-nz-5TQ"/>
-                                    <constraint firstItem="2N2-kl-BuZ" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="topMargin" id="p0p-cr-L0d"/>
+                                    <constraint firstItem="888-Fw-X1g" firstAttribute="top" secondItem="5ua-To-baj" secondAttribute="bottom" id="Xnp-ZZ-W4F"/>
+                                    <constraint firstAttribute="bottom" secondItem="888-Fw-X1g" secondAttribute="bottom" constant="8" id="mDr-b5-tbx"/>
+                                    <constraint firstItem="5ua-To-baj" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="top" constant="50" id="rCa-Qr-Bb8"/>
+                                    <constraint firstItem="5ua-To-baj" firstAttribute="centerX" secondItem="ODj-KR-rbU" secondAttribute="centerX" id="tD0-fa-Tvh"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
@@ -49,11 +62,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlF-zj-tRi">
-                                <rect key="frame" x="0.0" y="196" width="390" height="648"/>
+                                <rect key="frame" x="0.0" y="163" width="375" height="649"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4H-0D-eJZ" customClass="FloatingButton" customModule="AllRestaurants" customModuleProvider="target">
-                                <rect key="frame" x="145" y="758" width="100" height="42"/>
+                                <rect key="frame" x="137.66666666666666" y="726" width="100" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="1bj-dF-Hro"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="l2e-aj-0rI"/>
@@ -65,44 +78,46 @@
                                     <color key="baseBackgroundColor" name="AllGreen"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="toggleViewWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iWf-do-LD4"/>
+                                    <action selector="toggleView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Wi-9Z-DgV"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="ODj-KR-rbU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0KA-Pb-exZ"/>
+                            <constraint firstItem="BlF-zj-tRi" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="bottom" constant="2" id="Hnm-Yy-OUl"/>
                             <constraint firstAttribute="bottom" secondItem="BlF-zj-tRi" secondAttribute="bottom" id="OHh-oG-Edm"/>
                             <constraint firstItem="BlF-zj-tRi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OS3-c9-pG1"/>
                             <constraint firstItem="K4H-0D-eJZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RxX-YA-8ti"/>
-                            <constraint firstItem="ODj-KR-rbU" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.23" id="U1l-25-nfE"/>
-                            <constraint firstItem="BlF-zj-tRi" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="bottom" constant="2" id="X5X-00-472"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ODj-KR-rbU" secondAttribute="trailing" id="eJo-gb-Yrj"/>
-                            <constraint firstItem="ODj-KR-rbU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="le1-IB-2td"/>
+                            <constraint firstItem="888-Fw-X1g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="aHU-Vq-3HW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="888-Fw-X1g" secondAttribute="trailing" constant="16" id="cff-AI-F1o"/>
+                            <constraint firstItem="ODj-KR-rbU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="16" id="ekg-T1-WFF"/>
+                            <constraint firstItem="ODj-KR-rbU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gVj-an-fbq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="K4H-0D-eJZ" secondAttribute="bottom" constant="10" id="qqF-2s-3X0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BlF-zj-tRi" secondAttribute="trailing" id="wIs-PA-KoO"/>
+                            <constraint firstItem="ODj-KR-rbU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yWz-Ow-aLz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="BlF-zj-tRi" id="zXF-Ro-Zac"/>
                         <outlet property="floatingButton" destination="K4H-0D-eJZ" id="HG7-fg-n0Q"/>
+                        <outlet property="searchBar" destination="888-Fw-X1g" id="RaO-2c-wf1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="99"/>
+            <point key="canvasLocation" x="950.76923076923072" y="98.815165876777243"/>
         </scene>
         <!--Restaurant Table View Controller-->
         <scene sceneID="Cd6-4F-VKI">
             <objects>
                 <viewController storyboardIdentifier="RestaurantTableViewController" id="HQv-hi-bxS" customClass="RestaurantTableViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yLT-tt-HjR">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" estimatedRowHeight="96" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vma-an-OkX">
-                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="iHf-8N-TEL"/>
@@ -125,7 +140,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="la3-WM-Ay8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="803" y="99"/>
+            <point key="canvasLocation" x="1730.7692307692307" y="98.815165876777243"/>
+        </scene>
+        <!--Restaurant Map View Controller-->
+        <scene sceneID="Vr5-df-1Xx">
+            <objects>
+                <viewController storyboardIdentifier="RestaurantMapViewController" id="Xur-Dc-euo" customClass="RestaurantMapViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T5n-m1-scv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVL-gV-Kne">
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ndk-O4-fb2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ndk-O4-fb2" firstAttribute="trailing" secondItem="iVL-gV-Kne" secondAttribute="trailing" id="G46-62-tGP"/>
+                            <constraint firstItem="iVL-gV-Kne" firstAttribute="leading" secondItem="Ndk-O4-fb2" secondAttribute="leading" id="T3e-7k-J8U"/>
+                            <constraint firstAttribute="bottom" secondItem="iVL-gV-Kne" secondAttribute="bottom" id="eeD-Aw-1fM"/>
+                            <constraint firstItem="iVL-gV-Kne" firstAttribute="top" secondItem="Ndk-O4-fb2" secondAttribute="top" id="kY6-T7-Cm5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="iVL-gV-Kne" id="7lP-EX-Mej"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BMR-DV-Krh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2530" y="98"/>
         </scene>
     </scenes>
     <resources>

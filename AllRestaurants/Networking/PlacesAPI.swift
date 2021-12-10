@@ -14,12 +14,18 @@ enum Endpoint {
     static let baseURL = "https://maps.googleapis.com/maps/api/place/"
     
     case nearbyPlaces(String, String)
-    case search(String)
+    case search(String, String, String)
+    case photo(String)
     
     var stringValue: String {
         switch self {
-        case .nearbyPlaces(let latitude, let longitude): return Endpoint.baseURL + "nearbysearch/json?location=\(latitude),\(longitude)&radius=50000&keyword=food&rankby=prominence&key=\(apiKey)"
-        case .search(let query): return "textsearch/json?query=\(query)&key=\(apiKey)"
+        case .nearbyPlaces(let latitude, let longitude):
+            return Endpoint.baseURL + "nearbysearch/json?location=\(latitude),\(longitude)&radius=32186&type=restaurant&key=\(apiKey)"
+        case .search(let query, let latitude, let longitude):
+            let query = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            return Endpoint.baseURL + "textsearch/json?location=\(latitude),\(longitude)&radius=32186&query=\(query)&type=restaurant&key=\(apiKey)"
+        case .photo(let photoId):
+            return Endpoint.baseURL + "photo?maxwidth=400&photo_reference=\(photoId)&key=\(apiKey)"
         }
     }
     
@@ -36,9 +42,21 @@ class PlacesAPI {
         return URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data)
             .decode(type: Restaurants.self, decoder: JSONDecoder())
-            .map({ restaurants in
+            .map { restaurants in
                 restaurants.results
-            })
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func search(withText text: String, latitude: String, longitude: String) -> AnyPublisher<[Restaurant], Error> {
+        let url = Endpoint.search(text, latitude, longitude).url
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: Restaurants.self, decoder: JSONDecoder())
+            .map { restaurants in
+                restaurants.results
+            }
             .eraseToAnyPublisher()
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Chris Rene on 12/7/21.
 //
 
+import Combine
 import MapKit
 
 // San Francisco
@@ -12,35 +13,24 @@ let defaultLocation = CLLocationCoordinate2D(latitude: 37.773972, longitude: -12
 
 class RestaurantMapViewController: UIViewController {
     
-    private var mapView: MKMapView!
+    @IBOutlet private weak var mapView: MKMapView!
     private var region = MKCoordinateRegion(center: CLLocationManager().location?.coordinate ?? defaultLocation,
                                             span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-    private var restaurants: [Restaurant] = []
-    
-    init(_ restaurants: [Restaurant]) {
-        self.restaurants = restaurants
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func loadView() {
-        mapView = MKMapView()
-        view = mapView
-    }
+
+    private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        
-        addAnnotations()
-        mapView.zoomToFitAnnotations()
     }
     
-    func addAnnotations() {
-        restaurants.forEach { mapView.addAnnotation(RestaurantAnnotation(restaurant: $0)) }
+    private func updateAnnotations(with restaurants: [Restaurant]) {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        let annotations = restaurants.map { RestaurantAnnotation(restaurant: $0) }
+        mapView.addAnnotations(annotations)
+        
+        mapView.zoomToFitAnnotations()
     }
 }
 
@@ -72,11 +62,16 @@ extension RestaurantMapViewController: MKMapViewDelegate {
         }
         
         let cell = UINib(nibName: "RestaurantCell", bundle: nil).instantiate(withOwner: self, options: nil)[0] as! RestaurantCell
-        cell.configure(with: RestaurantViewModel(restaurant: selectedAnnotation.restaurant), isMapPin: true)
+        cell.configure(with: RestaurantViewModel(restaurant: selectedAnnotation.restaurant))
         cell.center = CGPoint(x: view.bounds.size.width / 2, y: -cell.bounds.size.height * 0.52)
+        cell.transform = CGAffineTransform(scaleX: 0, y: 0)
         view.addSubview(cell)
         
         mapView.setCenter(selectedAnnotation.coordinate, animated: true)
+        
+        UIView.animate(withDuration: 0.3) {
+            cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
@@ -84,5 +79,17 @@ extension RestaurantMapViewController: MKMapViewDelegate {
         for subview in view.subviews {
             subview.removeFromSuperview()
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        guard mapView.mapWasDragged else { return }
+        UIApplication.shared.sendAction(#selector(UIApplication.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+extension RestaurantMapViewController: RestaurantSearchObserver {
+    
+    func didReceiveRestaurants(_ restaurants: [Restaurant]) {
+        updateAnnotations(with: restaurants)
     }
 }

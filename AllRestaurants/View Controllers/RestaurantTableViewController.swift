@@ -18,18 +18,24 @@ class RestaurantTableViewController: UIViewController {
         case restaurants
     }
     
+    private enum BackgroundState {
+        case noLocation
+        case noResults(String)
+        
+        var backgroundView: UIView {
+            switch self {
+            case .noLocation:
+                return UIHostingController(rootView: NoLocationAccess()).view
+            case .noResults(let query):
+                return UIHostingController(rootView: NoResultsFound(text: query)).view
+            }
+        }
+    }
+    
     @IBOutlet private weak var tableView: UITableView!
     
-    private var locationManager: CLLocationManager?
-    private var dataSource: UITableViewDiffableDataSource<Section, Restaurant>!
     private var cancellables = Set<AnyCancellable>()
-    
-    private var activityIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .medium)
-        view.hidesWhenStopped = true
-        return view
-    }()
-    
+    private var dataSource: UITableViewDiffableDataSource<Section, Restaurant>?
     private(set) var restaurants = [Restaurant]() {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -42,13 +48,9 @@ class RestaurantTableViewController: UIViewController {
         super.viewDidLoad()
 
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        tableView.keyboardDismissMode = .onDrag
         
         configureDataSource()
-        
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager?.requestWhenInUseAuthorization()
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,7 +65,7 @@ class RestaurantTableViewController: UIViewController {
             return cell
         }
         
-        dataSource.defaultRowAnimation = .fade
+        dataSource?.defaultRowAnimation = .fade
         tableView.dataSource = dataSource
     }
     
@@ -71,59 +73,30 @@ class RestaurantTableViewController: UIViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
         snapshot.appendSections([.restaurants])
         snapshot.appendItems(restaurants, toSection: .restaurants)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
-    private func fetchNearbyRestaurants(from location: CLLocation?) {
-        guard let location = location else { return }
-        let coordinates = location.coordinate
-        
-        tableView.backgroundView = activityIndicator
-        activityIndicator.startAnimating()
-        
-        PlacesAPI().fetchNearbyRestaurants(latitude: "\(coordinates.latitude)", longitude: "\(coordinates.longitude)")
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _  in
-                self?.activityIndicator.stopAnimating()
-            } receiveValue: { [weak self] restaurants in
-                self?.restaurants = restaurants
-            }
-            .store(in: &cancellables)
-    }
-
-    private func showAlert(title: String = "Uh Oh", message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
-    private func showNoLocationView() {
-        let controller = UIHostingController(rootView: NoLocationAccess())
-        tableView.backgroundView = controller.view
+    private func configureBackground(forState state: BackgroundState) {
+        tableView.backgroundView = state.backgroundView
     }
 }
 
-extension RestaurantTableViewController: CLLocationManagerDelegate {
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .notDetermined: manager.requestWhenInUseAuthorization()
-        case .authorizedWhenInUse:
-            manager.startUpdatingLocation()
-            fetchNearbyRestaurants(from: manager.location)
-            manager.stopUpdatingLocation()
-        default:
-            showNoLocationView()
-            restaurants = []
+extension RestaurantTableViewController: RestaurantSearchObserver {
+    
+    func didReceiveRestaurants(_ restaurants: [Restaurant]) {
+        self.restaurants = restaurants
+    }
+    
+    func didNotReceiveResults(forText text: String) {
+        guard restaurants.isEmpty else {
+            tableView.backgroundView = nil
+            return
         }
+        configureBackground(forState: .noResults(text))
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        showAlert(title: "Location Update Error", message: error.localizedDescription)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = manager.location else { return }
-        self.fetchNearbyRestaurants(from: location)
-        manager.stopUpdatingLocation()
+    func locationAccessDenied(_ isDenied: Bool) {
+        guard isDenied else { return }
+        configureBackground(forState: .noLocation)
     }
 }

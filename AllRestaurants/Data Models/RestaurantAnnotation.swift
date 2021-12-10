@@ -8,7 +8,7 @@
 import MapKit
 
 class RestaurantAnnotation: NSObject, MKAnnotation {
-    var coordinate: CLLocationCoordinate2D
+    dynamic var coordinate: CLLocationCoordinate2D
     var restaurant: Restaurant
     var title: String?
     

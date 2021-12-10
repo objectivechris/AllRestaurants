@@ -5,8 +5,8 @@
 //  Created by Chris Rene on 12/5/21.
 //
 
-import CoreLocation
 import Foundation
+import CoreLocation
 import CoreGraphics
 
 class RestaurantViewModel {
@@ -15,7 +15,7 @@ class RestaurantViewModel {
     let priceLevel: String
     let starRating: Double
     let reviewCount: Int
-    let imageURL: URL
+    let photoId: String
     
     private let restaurant: Restaurant
     
@@ -30,7 +30,7 @@ class RestaurantViewModel {
         priceLevel = restaurant.priceLevel == 0 ? "$" : String(repeating: "$", count: restaurant.priceLevel)
         starRating = restaurant.rating
         reviewCount = restaurant.userRatingsTotal
-        imageURL = URL(string: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png")!
+        photoId = restaurant.photoId
     }
     
     func distanceInMiles(from coordinate: CLLocationCoordinate2D) -> Double {
