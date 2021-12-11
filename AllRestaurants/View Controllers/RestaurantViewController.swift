@@ -149,6 +149,10 @@ class RestaurantViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+
+    override var shouldAutorotate: Bool {
+        false
+    }
 }
 
 // MARK: - LocationManagerDelegate
