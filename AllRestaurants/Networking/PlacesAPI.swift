@@ -20,10 +20,10 @@ enum Endpoint {
     var stringValue: String {
         switch self {
         case .nearbyPlaces(let latitude, let longitude):
-            return Endpoint.baseURL + "nearbysearch/json?location=\(latitude),\(longitude)&radius=32186&type=restaurant&key=\(apiKey)"
+            return Endpoint.baseURL + "nearbysearch/json?location=\(latitude),\(longitude)&radius=50000&type=restaurant&key=\(apiKey)"
         case .search(let query, let latitude, let longitude):
             let query = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-            return Endpoint.baseURL + "textsearch/json?location=\(latitude),\(longitude)&radius=32186&query=\(query)&type=restaurant&key=\(apiKey)"
+            return Endpoint.baseURL + "textsearch/json?location=\(latitude),\(longitude)&radius=50000&query=\(query)&type=restaurant&key=\(apiKey)"
         case .photo(let photoId):
             return Endpoint.baseURL + "photo?maxwidth=400&photo_reference=\(photoId)&key=\(apiKey)"
         }

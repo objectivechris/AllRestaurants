@@ -70,7 +70,7 @@ extension UIImageView {
 }
 
 extension UIColor {
-    static var allTrailsGreen = UIColor(named: "AllGreen")!
+    static var allTrailsGreen = UIColor(named: "allGreen")!
 }
 
 extension Color {
@@ -105,7 +105,7 @@ extension MKAnnotationView {
 extension MKMapView {
     func zoomToFitAnnotations() {
         guard !annotations.isEmpty else { return }
-        
+
         var topLeftCoord = CLLocationCoordinate2D(latitude: -90, longitude: 180)
         var bottomRightCoord = CLLocationCoordinate2D(latitude: 90, longitude: -180)
         

@@ -88,6 +88,7 @@ extension RestaurantTableViewController: RestaurantSearchObserver {
     }
     
     func didNotReceiveResults(forText text: String) {
+        guard CLLocationManager().authorizationStatus != .notDetermined else { return }
         guard restaurants.isEmpty else {
             tableView.backgroundView = nil
             return

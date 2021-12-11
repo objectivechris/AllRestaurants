@@ -35,8 +35,6 @@ class RestaurantViewController: UIViewController {
         return viewController
     }()
     
-    private var state: String? = ""
-    
     // Observers & Subscriptions
     private var cancellables = Set<AnyCancellable>()
     private var observations = [ObjectIdentifier: Observation]()
@@ -87,6 +85,7 @@ class RestaurantViewController: UIViewController {
     private func setupBindings() {
         $searchText
             .debounce(for: 0.5, scheduler: RunLoop.main)
+            .removeDuplicates()
             .sink { [weak self] query in
                 guard let self = self else { return }
                 if query.isEmpty {
@@ -140,17 +139,9 @@ class RestaurantViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { _  in
             } receiveValue: { [weak self] restaurants in
-                self?.filterRestaurants(restaurants)
+                self?.restaurants = restaurants
             }
             .store(in: &cancellables)
-    }
-    
-    private func filterRestaurants(_ restaurants: [Restaurant]) {
-        guard let state = state else {
-            self.restaurants = []
-            return
-        }
-        self.restaurants = restaurants.filter { $0.address.contains(state) }
     }
     
     private func showAlert(title: String = "Uh Oh", message: String? = nil) {
@@ -181,17 +172,6 @@ extension RestaurantViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations[0]
-        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
-            if let error = error {
-                self?.showAlert(title: "Uh Oh", message: error.localizedDescription)
-                return
-            }
-            
-            if let placemark = placemarks?.first {
-                self?.state = placemark.administrativeArea
-            }
-        }
         manager.stopUpdatingLocation()
     }
 }

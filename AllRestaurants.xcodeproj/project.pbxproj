@@ -133,7 +133,7 @@
 				D0670486275B21AC002A3A9B /* Main.storyboard */,
 				D07D0061275FFB350067920C /* View Controllers */,
 				D07D0060275FFB280067920C /* Custom Cell */,
-				D07D0062275FFB4C0067920C /* Custom SwiftUI Views */,
+				D07D0062275FFB4C0067920C /* Custom Views */,
 				D06704B7275B271A002A3A9B /* Networking */,
 				D07D0063275FFB810067920C /* Data Models */,
 				D067048C275B21AD002A3A9B /* Assets.xcassets */,
@@ -180,7 +180,7 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		D07D0062275FFB4C0067920C /* Custom SwiftUI Views */ = {
+		D07D0062275FFB4C0067920C /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
 				D09AE980275FB2EA00AB118B /* FloatingButton.swift */,
@@ -188,7 +188,7 @@
 				D056F11427623C4200ACC359 /* NoResultsFound.swift */,
 				D06704BA275B27F9002A3A9B /* StarRating.swift */,
 			);
-			path = "Custom SwiftUI Views";
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		D07D0063275FFB810067920C /* Data Models */ = {
