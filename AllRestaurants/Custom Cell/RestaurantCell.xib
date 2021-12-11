@@ -29,7 +29,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFg-1p-Kea">
-                        <rect key="frame" x="117" y="16" width="177" height="19.5"/>
+                        <rect key="frame" x="117" y="16" width="171" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -78,7 +78,7 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="cFg-1p-Kea" secondAttribute="trailing" constant="10" id="3g4-ie-YhN"/>
+                    <constraint firstItem="cFg-1p-Kea" firstAttribute="trailing" secondItem="blI-gf-uND" secondAttribute="trailingMargin" id="3g4-ie-YhN"/>
                     <constraint firstItem="blI-gf-uND" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="5Z1-G7-AEE"/>
                     <constraint firstAttribute="trailing" secondItem="blI-gf-uND" secondAttribute="trailing" constant="24" id="Frc-N9-Fif"/>
                     <constraint firstItem="tvi-yJ-Vnr" firstAttribute="leading" secondItem="Bdr-p1-p1V" secondAttribute="leading" id="LJN-YM-68D"/>
