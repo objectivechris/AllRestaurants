@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q1M-tl-xln">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
@@ -12,93 +12,18 @@
         <!--Restaurant View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RestaurantViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="BYZ-38-t0r" customClass="RestaurantViewController" customModule="AllRestaurants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODj-KR-rbU" userLabel="Search Bar View">
-                                <rect key="frame" x="0.0" y="0.0" width="391" height="161"/>
-                                <subviews>
-                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for a restaurant" translatesAutoresizingMaskIntoConstraints="NO" id="888-Fw-X1g">
-                                        <rect key="frame" x="16" y="102" width="343" height="51"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="51" id="cEP-gE-ezw"/>
-                                        </constraints>
-                                        <color key="tintColor" name="AllGreen"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="yes"/>
-                                    </searchBar>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navbar-logo" translatesAutoresizingMaskIntoConstraints="NO" id="5ua-To-baj">
-                                        <rect key="frame" x="68" y="50" width="255" height="52"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="OtO-7S-Mp2"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96078431369999995" green="0.95686274510000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES" header="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstItem="888-Fw-X1g" firstAttribute="top" secondItem="5ua-To-baj" secondAttribute="bottom" id="Xnp-ZZ-W4F"/>
-                                    <constraint firstAttribute="bottom" secondItem="888-Fw-X1g" secondAttribute="bottom" constant="8" id="mDr-b5-tbx"/>
-                                    <constraint firstItem="5ua-To-baj" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="top" constant="50" id="rCa-Qr-Bb8"/>
-                                    <constraint firstItem="5ua-To-baj" firstAttribute="centerX" secondItem="ODj-KR-rbU" secondAttribute="centerX" id="tD0-fa-Tvh"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                        <real key="value" value="0.40000000000000002"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.shadowColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlF-zj-tRi">
-                                <rect key="frame" x="0.0" y="163" width="375" height="649"/>
-                                <color key="backgroundColor" red="0.96078431369999995" green="0.95686274510000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3l-IB-An9">
-                                <rect key="frame" x="137.66666666666666" y="726" width="100" height="42"/>
-                                <color key="backgroundColor" name="allGreen"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="zE0-zw-tLn"/>
-                                    <constraint firstAttribute="width" constant="100" id="zbK-jQ-yFA"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
-                        <constraints>
-                            <constraint firstItem="BlF-zj-tRi" firstAttribute="top" secondItem="ODj-KR-rbU" secondAttribute="bottom" constant="2" id="Hnm-Yy-OUl"/>
-                            <constraint firstAttribute="bottom" secondItem="BlF-zj-tRi" secondAttribute="bottom" id="OHh-oG-Edm"/>
-                            <constraint firstItem="BlF-zj-tRi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OS3-c9-pG1"/>
-                            <constraint firstItem="x3l-IB-An9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TSd-Ah-VXR"/>
-                            <constraint firstItem="888-Fw-X1g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="aHU-Vq-3HW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="888-Fw-X1g" secondAttribute="trailing" constant="16" id="cff-AI-F1o"/>
-                            <constraint firstItem="ODj-KR-rbU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="16" id="ekg-T1-WFF"/>
-                            <constraint firstItem="ODj-KR-rbU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gVj-an-fbq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="x3l-IB-An9" secondAttribute="bottom" constant="10" id="v2z-fJ-SBw"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BlF-zj-tRi" secondAttribute="trailing" id="wIs-PA-KoO"/>
-                            <constraint firstItem="ODj-KR-rbU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yWz-Ow-aLz"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <connections>
-                        <outlet property="buttonContainerView" destination="x3l-IB-An9" id="L1G-YJ-6MP"/>
-                        <outlet property="containerView" destination="BlF-zj-tRi" id="zXF-Ro-Zac"/>
-                        <outlet property="searchBar" destination="888-Fw-X1g" id="RaO-2c-wf1"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="oVO-Br-eCp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1892" y="98.275862068965523"/>
+            <point key="canvasLocation" x="3618.4000000000001" y="97.536945812807886"/>
         </scene>
         <!--Restaurant Table View Controller-->
         <scene sceneID="Cd6-4F-VKI">
@@ -133,22 +58,46 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="la3-WM-Ay8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2672.8000000000002" y="98.275862068965523"/>
+            <point key="canvasLocation" x="4380" y="97.536945812807886"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="b7t-If-4a5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" id="q1M-tl-xln" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pa7-Tf-eRj">
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="allGreen"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" name="allGreen"/>
+                            <textAttributes key="titleTextAttributes">
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </textAttributes>
+                        </navigationBarAppearance>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" name="allGreen"/>
+                            <textAttributes key="titleTextAttributes">
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </textAttributes>
+                        </navigationBarAppearance>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zcu-XS-Jpz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jv3-Pw-pvI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2874" y="98"/>
         </scene>
     </scenes>
     <resources>
-        <image name="navbar-logo" width="255" height="52"/>
-        <namedColor name="AllGreen">
-            <color red="0.25900000333786011" green="0.54100000858306885" blue="0.075000002980232239" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="allGreen">
             <color red="0.25900000333786011" green="0.54100000858306885" blue="0.075000002980232239" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

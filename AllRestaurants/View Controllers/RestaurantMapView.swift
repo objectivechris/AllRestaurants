@@ -15,27 +15,25 @@ struct RestaurantMapView: View {
     
     var body: some View {
         VStack {
-            Map(position: $viewModel.position) {
+            Map(position: $viewModel.position, interactionModes: .all) {
                 ForEach(viewModel.restaurants) { restaurant in
                     Marker(restaurant.name, coordinate: restaurant.coordinate)
                         .tint(Color.allTrailsGreen)
                 }
                 UserAnnotation()
-                    .foregroundStyle(.blue)
                 
             }
         }
         .gesture(DragGesture().onChanged { _ in
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         })
-        .overlay(alignment: .bottomTrailing) {
-            VStack {
-                MapUserLocationButton()
-            }
-            .padding(.trailing, 10)
-            .buttonBorderShape(.circle)
-            .tint(Color.blue)
+        .mapControls {
+            MapUserLocationButton()
+                .buttonBorderShape(.circle)
+            MapCompass()
         }
+        .tint(Color.blue)
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 

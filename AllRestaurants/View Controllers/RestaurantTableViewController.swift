@@ -55,7 +55,7 @@ class RestaurantTableViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }
     
     private func configureBackground(forState state: BackgroundState) {

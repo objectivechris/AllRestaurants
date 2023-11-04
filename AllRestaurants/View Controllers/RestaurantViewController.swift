@@ -12,10 +12,6 @@ import MapKit
 
 class RestaurantViewController: UIViewController {
     
-    @IBOutlet private weak var searchBar: UISearchBar!
-    @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var buttonContainerView: UIView!
-    
     private lazy var tableViewController: RestaurantTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "RestaurantTableViewController") as! RestaurantTableViewController
@@ -29,6 +25,24 @@ class RestaurantViewController: UIViewController {
         return hostingController
     }()
     
+    private lazy var searchController: UISearchController = {
+        let search = UISearchController(searchResultsController: nil)
+        search.searchBar.delegate = self
+        search.searchBar.searchTextField.backgroundColor = .white
+        return search
+    }()
+    
+    private lazy var toggleButton: UIHostingController = {
+        let button = UIHostingController(rootView: ToggleButton(style: self.style))
+        self.addChildVC(button)
+        button.view.backgroundColor = .clear
+        button.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleView)))
+        button.view.translatesAutoresizingMaskIntoConstraints = false
+        button.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        button.view.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -20).isActive = true
+        return button
+    }()
+    
     private lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
         manager.delegate = self
@@ -36,21 +50,29 @@ class RestaurantViewController: UIViewController {
         return manager
     }()
     
-    private var subscriptions = Set<AnyCancellable>()
     private let viewModel = RestaurantViewModel()
-    private var style = ButtonStyle.map
+    private var subscriptions = Set<AnyCancellable>()
+    private var style: ButtonStyle = .map {
+        didSet {
+            switch style {
+            case .map:
+                display(tableViewController)
+            case .list:
+                display(mapViewController)
+            }
+        }
+    }
     
     @Published private var searchText: String?
     @Published private var restaurants: [Restaurant] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addChildVC(mapViewController)
-        addChildVC(tableViewController)
-        
+        addChildVC(toggleButton)
         setupBindings()
         
-        searchBar.delegate = self
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         
         if locationManager.authorizationStatus == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
@@ -59,37 +81,6 @@ class RestaurantViewController: UIViewController {
         } else {
             showAlert(title: "Location Disabled", message: "Please review your location permissions in Settings")
         }
-    }
-    
-    override func viewIsAppearing(_ animated: Bool) {
-        super.viewIsAppearing(animated)
-        let toggleButton = UIHostingController(rootView: ToggleButton(style: style))
-        toggleButton.view.translatesAutoresizingMaskIntoConstraints = false
-        toggleButton.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleView)))
-        addChild(toggleButton)
-        buttonContainerView.addSubview(toggleButton.view)
-        
-        
-        NSLayoutConstraint.activate([
-            toggleButton.view.centerXAnchor.constraint(equalTo: buttonContainerView.centerXAnchor),
-            toggleButton.view.centerYAnchor.constraint(equalTo: buttonContainerView.centerYAnchor),
-        ])
-        
-        toggleButton.didMove(toParent: self)
-    }
-    
-    private func addChildVC(_ childVC: UIViewController) {
-        addChild(childVC)
-        
-        containerView.addSubview(childVC.view)
-        
-        childVC.view.translatesAutoresizingMaskIntoConstraints = false
-        childVC.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        childVC.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        childVC.view.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        childVC.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        
-        childVC.didMove(toParent: self)
     }
     
     private func setupBindings() {
@@ -119,13 +110,35 @@ class RestaurantViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] rest in
                 self?.tableViewController.restaurants = rest
+                self?.title = "\(rest.count) results found"
             }
             .store(in: &subscriptions)
     }
     
-    @IBAction func toggleView(_ sender: Any?) {
-        tableViewController.view.isHidden.toggle()
-        mapViewController.view.isHidden = !tableViewController.view.isHidden
+    @objc private func toggleView() {
+        style.toggle()
+    }
+    
+    private func display(_ viewController: UIViewController) {
+        // Remove the currently displayed view controller
+        if let currentViewController = children.filter({ !($0 is UIHostingController<ToggleButton>) }).first {
+            currentViewController.willMove(toParent: nil)
+            currentViewController.view.removeFromSuperview()
+            currentViewController.removeFromParent()
+        }
+        
+        addChildVC(viewController)
+    }
+    
+    private func addChildVC(_ childVC: UIViewController) {
+        addChild(childVC)
+        childVC.view.frame = view.bounds
+        if childVC is UIHostingController<ToggleButton> {
+            view.addSubview(childVC.view)
+        } else {
+            view.insertSubview(childVC.view, belowSubview: toggleButton.view)
+        }
+        childVC.didMove(toParent: self)
     }
     
     private func fetchNearbyRestaurants() {
@@ -159,11 +172,11 @@ extension RestaurantViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        showAlert(title: "Location Update Error", message: error.localizedDescription)
+        showAlert(title: "Location Update Error", message: (error as? GMError)?.errorDescription ?? error.localizedDescription)
     }
 }
 
-extension RestaurantViewController: UISearchBarDelegate {
+extension RestaurantViewController: UISearchControllerDelegate, UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText
     }
