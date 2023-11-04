@@ -64,4 +64,14 @@ extension Restaurant {
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
     }
+    
+    static func example() -> [Restaurant] {
+        return [Restaurant(name: "AA",
+                                     priceLevel: 23,
+                                     rating: 4,
+                                     userRatingsTotal: 3,
+                                     location: Restaurant.Coordinates(lat: 33.9196, lng: -84.4851),
+                                     photoId: "",
+                                     address: "")]        
+    }
 }

@@ -10,7 +10,7 @@ import XCTest
 
 class RestaurantsViewModelTests: XCTestCase {
 
-    var viewModel: RestaurantViewModel!
+    var viewModel: RestaurantCellViewModel!
     var restaurant: Restaurant!
     
     override func setUp() {
@@ -45,7 +45,7 @@ class RestaurantsViewModelTests: XCTestCase {
             XCTFail("Error loading \(fileName)")
         }
         
-        viewModel = RestaurantViewModel(restaurant: restaurant)
+        viewModel = RestaurantCellViewModel(restaurant: restaurant)
     }
 }
 

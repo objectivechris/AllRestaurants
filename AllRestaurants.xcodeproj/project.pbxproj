@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D00018FC2AF2F0A700BB133E /* RestaurantMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00018FB2AF2F0A700BB133E /* RestaurantMapView.swift */; };
 		D01FBCAC2760DE7100F49161 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */; };
 		D02F3AEE2763F87E00B2CA66 /* NearbySearch.json in Sources */ = {isa = PBXBuildFile; fileRef = D02F3AED2763F87E00B2CA66 /* NearbySearch.json */; };
 		D02F3AF02763F8AE00B2CA66 /* TextSearch.json in Sources */ = {isa = PBXBuildFile; fileRef = D02F3AEF2763F8AE00B2CA66 /* TextSearch.json */; };
@@ -21,15 +22,18 @@
 		D067048D275B21AD002A3A9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D067048C275B21AD002A3A9B /* Assets.xcassets */; };
 		D0670490275B21AD002A3A9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D067048E275B21AD002A3A9B /* LaunchScreen.storyboard */; };
 		D067049B275B21AD002A3A9B /* RestaurantsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067049A275B21AD002A3A9B /* RestaurantsViewModelTests.swift */; };
-		D06704B6275B2703002A3A9B /* PlacesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06704B5275B2703002A3A9B /* PlacesAPI.swift */; };
 		D06704BB275B27F9002A3A9B /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06704BA275B27F9002A3A9B /* StarRating.swift */; };
 		D06704BF275B379F002A3A9B /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06704BE275B379F002A3A9B /* Restaurant.swift */; };
-		D07D005F275FF2B60067920C /* RestaurantMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D005E275FF2B60067920C /* RestaurantMapViewController.swift */; };
-		D09AE981275FB2EA00AB118B /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AE980275FB2EA00AB118B /* FloatingButton.swift */; };
+		D0928CA02AF0B4B5001AEBC8 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0928C9F2AF0B4B5001AEBC8 /* ToggleButton.swift */; };
+		D09AE981275FB2EA00AB118B /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AE980275FB2EA00AB118B /* ButtonStyle.swift */; };
 		D09AE9A3275FF13500AB118B /* RestaurantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AE9A2275FF13500AB118B /* RestaurantTableViewController.swift */; };
-		D0AFEA5A275D574D00231FDA /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFEA59275D574D00231FDA /* RestaurantViewModel.swift */; };
+		D0AFEA5A275D574D00231FDA /* RestaurantCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFEA59275D574D00231FDA /* RestaurantCellViewModel.swift */; };
 		D0AFEA5E275D69A100231FDA /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AFEA5D275D69A100231FDA /* RestaurantCell.swift */; };
 		D0AFEA60275D69E200231FDA /* RestaurantCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0AFEA5F275D69E200231FDA /* RestaurantCell.xib */; };
+		D0D3A57A2AEF104D0000FDC0 /* GMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3A5792AEF104D0000FDC0 /* GMClient.swift */; };
+		D0D3A57C2AEF10570000FDC0 /* GMError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3A57B2AEF10570000FDC0 /* GMError.swift */; };
+		D0D3A57E2AEF10660000FDC0 /* GMEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3A57D2AEF10660000FDC0 /* GMEndpoint.swift */; };
+		D0D3A5802AEF14260000FDC0 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3A57F2AEF14260000FDC0 /* RestaurantViewModel.swift */; };
 		D0D95B66275EC43E00EA60C6 /* Type+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D95B65275EC43E00EA60C6 /* Type+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D00018FB2AF2F0A700BB133E /* RestaurantMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMapView.swift; sourceTree = "<group>"; };
 		D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
 		D02F3AED2763F87E00B2CA66 /* NearbySearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NearbySearch.json; sourceTree = "<group>"; };
 		D02F3AEF2763F8AE00B2CA66 /* TextSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TextSearch.json; sourceTree = "<group>"; };
@@ -68,15 +73,18 @@
 		D0670496275B21AD002A3A9B /* AllRestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllRestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D067049A275B21AD002A3A9B /* RestaurantsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModelTests.swift; sourceTree = "<group>"; };
 		D06704A0275B21AD002A3A9B /* AllRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D06704B5275B2703002A3A9B /* PlacesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesAPI.swift; sourceTree = "<group>"; };
 		D06704BA275B27F9002A3A9B /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
 		D06704BE275B379F002A3A9B /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		D07D005E275FF2B60067920C /* RestaurantMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMapViewController.swift; sourceTree = "<group>"; };
-		D09AE980275FB2EA00AB118B /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		D0928C9F2AF0B4B5001AEBC8 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
+		D09AE980275FB2EA00AB118B /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		D09AE9A2275FF13500AB118B /* RestaurantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewController.swift; sourceTree = "<group>"; };
-		D0AFEA59275D574D00231FDA /* RestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
+		D0AFEA59275D574D00231FDA /* RestaurantCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellViewModel.swift; sourceTree = "<group>"; };
 		D0AFEA5D275D69A100231FDA /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 		D0AFEA5F275D69E200231FDA /* RestaurantCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestaurantCell.xib; sourceTree = "<group>"; };
+		D0D3A5792AEF104D0000FDC0 /* GMClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMClient.swift; sourceTree = "<group>"; };
+		D0D3A57B2AEF10570000FDC0 /* GMError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMError.swift; sourceTree = "<group>"; };
+		D0D3A57D2AEF10660000FDC0 /* GMEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMEndpoint.swift; sourceTree = "<group>"; };
+		D0D3A57F2AEF14260000FDC0 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
 		D0D95B65275EC43E00EA60C6 /* Type+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +164,9 @@
 		D06704B7275B271A002A3A9B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				D06704B5275B2703002A3A9B /* PlacesAPI.swift */,
+				D0D3A5792AEF104D0000FDC0 /* GMClient.swift */,
+				D0D3A57D2AEF10660000FDC0 /* GMEndpoint.swift */,
+				D0D3A57B2AEF10570000FDC0 /* GMError.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -175,7 +185,7 @@
 			children = (
 				D0670484275B21AC002A3A9B /* RestaurantViewController.swift */,
 				D09AE9A2275FF13500AB118B /* RestaurantTableViewController.swift */,
-				D07D005E275FF2B60067920C /* RestaurantMapViewController.swift */,
+				D00018FB2AF2F0A700BB133E /* RestaurantMapView.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -183,7 +193,8 @@
 		D07D0062275FFB4C0067920C /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				D09AE980275FB2EA00AB118B /* FloatingButton.swift */,
+				D09AE980275FB2EA00AB118B /* ButtonStyle.swift */,
+				D0928C9F2AF0B4B5001AEBC8 /* ToggleButton.swift */,
 				D03D469D275F960900903545 /* NoLocationAccess.swift */,
 				D056F11427623C4200ACC359 /* NoResultsFound.swift */,
 				D06704BA275B27F9002A3A9B /* StarRating.swift */,
@@ -196,7 +207,8 @@
 			children = (
 				D06704BE275B379F002A3A9B /* Restaurant.swift */,
 				D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */,
-				D0AFEA59275D574D00231FDA /* RestaurantViewModel.swift */,
+				D0D3A57F2AEF14260000FDC0 /* RestaurantViewModel.swift */,
+				D0AFEA59275D574D00231FDA /* RestaurantCellViewModel.swift */,
 				D0D95B65275EC43E00EA60C6 /* Type+Extensions.swift */,
 			);
 			path = "Data Models";
@@ -266,7 +278,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					D067047C275B21AC002A3A9B = {
 						CreatedOnToolsVersion = 13.1;
@@ -337,22 +349,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0D3A57E2AEF10660000FDC0 /* GMEndpoint.swift in Sources */,
 				D0AFEA5E275D69A100231FDA /* RestaurantCell.swift in Sources */,
 				D09AE9A3275FF13500AB118B /* RestaurantTableViewController.swift in Sources */,
 				D02F3AF02763F8AE00B2CA66 /* TextSearch.json in Sources */,
 				D0670485275B21AC002A3A9B /* RestaurantViewController.swift in Sources */,
-				D09AE981275FB2EA00AB118B /* FloatingButton.swift in Sources */,
+				D0D3A57A2AEF104D0000FDC0 /* GMClient.swift in Sources */,
+				D09AE981275FB2EA00AB118B /* ButtonStyle.swift in Sources */,
 				D06704BB275B27F9002A3A9B /* StarRating.swift in Sources */,
 				D056F11527623C4200ACC359 /* NoResultsFound.swift in Sources */,
 				D02F3AEE2763F87E00B2CA66 /* NearbySearch.json in Sources */,
 				D0670481275B21AC002A3A9B /* AppDelegate.swift in Sources */,
 				D03D469E275F960900903545 /* NoLocationAccess.swift in Sources */,
 				D01FBCAC2760DE7100F49161 /* RestaurantAnnotation.swift in Sources */,
-				D07D005F275FF2B60067920C /* RestaurantMapViewController.swift in Sources */,
 				D0670483275B21AC002A3A9B /* SceneDelegate.swift in Sources */,
+				D0928CA02AF0B4B5001AEBC8 /* ToggleButton.swift in Sources */,
+				D0D3A57C2AEF10570000FDC0 /* GMError.swift in Sources */,
 				D0D95B66275EC43E00EA60C6 /* Type+Extensions.swift in Sources */,
-				D06704B6275B2703002A3A9B /* PlacesAPI.swift in Sources */,
-				D0AFEA5A275D574D00231FDA /* RestaurantViewModel.swift in Sources */,
+				D0D3A5802AEF14260000FDC0 /* RestaurantViewModel.swift in Sources */,
+				D0AFEA5A275D574D00231FDA /* RestaurantCellViewModel.swift in Sources */,
+				D00018FC2AF2F0A700BB133E /* RestaurantMapView.swift in Sources */,
 				D06704BF275B379F002A3A9B /* Restaurant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +460,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -458,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -505,6 +522,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -513,7 +531,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -539,8 +557,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -572,8 +589,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -597,7 +613,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L282C3DF98;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -622,7 +638,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L282C3DF98;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

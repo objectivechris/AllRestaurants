@@ -6,65 +6,76 @@
 //
 
 import Combine
-import CoreLocation
+import SwiftUI
 import UIKit
-
-fileprivate let storyboardIdentifier = "Main"
-fileprivate let tableVCIdentifier = "RestaurantTableViewController"
-fileprivate let mapVCIdentifier = "RestaurantMapViewController"
+import MapKit
 
 class RestaurantViewController: UIViewController {
     
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var floatingButton: FloatingButton!
+    @IBOutlet private weak var buttonContainerView: UIView!
     
     private lazy var tableViewController: RestaurantTableViewController = {
-        let storyboard = UIStoryboard(name: storyboardIdentifier, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: tableVCIdentifier) as! RestaurantTableViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "RestaurantTableViewController") as! RestaurantTableViewController
         self.addChildVC(viewController)
-        addObserver(viewController)
         return viewController
     }()
     
-    private lazy var mapViewController: RestaurantMapViewController = {
-        let storyboard = UIStoryboard(name: storyboardIdentifier, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: mapVCIdentifier) as! RestaurantMapViewController
-        self.addChildVC(viewController)
-        addObserver(viewController)
-        return viewController
+    private lazy var mapViewController: UIHostingController = {
+        let hostingController = UIHostingController(rootView: RestaurantMapView(viewModel: self.viewModel))
+        self.addChildVC(hostingController)
+        return hostingController
     }()
     
-    // Observers & Subscriptions
-    private var cancellables = Set<AnyCancellable>()
-    private var observations = [ObjectIdentifier: Observation]()
+    private lazy var locationManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        return manager
+    }()
     
-    // Location properties
-    private var locationManager: CLLocationManager?
-    private lazy var geocoder = CLGeocoder()
-    private var authorizationDenied: Bool = false
-    private var restaurants = [Restaurant]() {
-        didSet {
-            notifyObservers()
-        }
-    }
+    private var subscriptions = Set<AnyCancellable>()
+    private let viewModel = RestaurantViewModel()
+    private var style = ButtonStyle.map
     
-    @Published private var searchText: String = ""
+    @Published private var searchText: String?
+    @Published private var restaurants: [Restaurant] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildVC(mapViewController)
         addChildVC(tableViewController)
         
-        searchBar.resignFirstResponder()
+        setupBindings()
+        
         searchBar.delegate = self
         
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager?.requestWhenInUseAuthorization()
+        if locationManager.authorizationStatus == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else if locationManager.authorizationStatus == .authorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+        } else {
+            showAlert(title: "Location Disabled", message: "Please review your location permissions in Settings")
+        }
+    }
+    
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        let toggleButton = UIHostingController(rootView: ToggleButton(style: style))
+        toggleButton.view.translatesAutoresizingMaskIntoConstraints = false
+        toggleButton.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleView)))
+        addChild(toggleButton)
+        buttonContainerView.addSubview(toggleButton.view)
         
-        setupBindings()
+        
+        NSLayoutConstraint.activate([
+            toggleButton.view.centerXAnchor.constraint(equalTo: buttonContainerView.centerXAnchor),
+            toggleButton.view.centerYAnchor.constraint(equalTo: buttonContainerView.centerYAnchor),
+        ])
+        
+        toggleButton.didMove(toParent: self)
     }
     
     private func addChildVC(_ childVC: UIViewController) {
@@ -81,106 +92,77 @@ class RestaurantViewController: UIViewController {
         childVC.didMove(toParent: self)
     }
     
-    // Subscribe to the searchText for downstream values
     private func setupBindings() {
+        viewModel.$error
+            .receive(on: RunLoop.main)
+            .compactMap { $0 }
+            .sink { [weak self] error in
+                self?.showAlert(message: error.errorDescription ?? "Unknown Error")
+            }
+            .store(in: &subscriptions)
+        
         $searchText
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
+            .compactMap({ $0 })
             .sink { [weak self] query in
                 guard let self = self else { return }
                 if query.isEmpty {
                     self.fetchNearbyRestaurants()
                 } else {
-                    self.searchNearbyRestaurants(withText: query)
+                    self.searchForRestaurants(withText: query)
                 }
             }
-            .store(in: &cancellables)
+            .store(in: &subscriptions)
+        
+        viewModel.$restaurants
+            .receive(on: RunLoop.main)
+            .sink { [weak self] rest in
+                self?.tableViewController.restaurants = rest
+            }
+            .store(in: &subscriptions)
     }
     
     @IBAction func toggleView(_ sender: Any?) {
         tableViewController.view.isHidden.toggle()
         mapViewController.view.isHidden = !tableViewController.view.isHidden
-        
-        if tableViewController.view.isHidden {
-            floatingButton.style(for: .list)
-        } else {
-            floatingButton.style(for: .map)
-        }
     }
     
     private func fetchNearbyRestaurants() {
-        guard let location = CLLocationManager().location else {
-            restaurants = []
-            return
+        Task {
+            try await viewModel.fetchNearbyRestaurants(fromLocation: locationManager.location)
         }
-        
-        let coordinates = location.coordinate
-
-        // Subscribe to the search publisher and notify observers
-        PlacesAPI().fetchNearbyRestaurants(latitude: "\(coordinates.latitude)", longitude: "\(coordinates.longitude)")
-            .receive(on: DispatchQueue.main)
-            .sink { _  in
-            } receiveValue: { [weak self] restaurants in
-                self?.restaurants = restaurants
-            }
-            .store(in: &cancellables)
     }
     
-    private func searchNearbyRestaurants(withText text: String) {
-        guard let location = CLLocationManager().location else {
-            restaurants = []
-            return
+    private func searchForRestaurants(withText text: String) {
+        Task {
+            try await viewModel.searchForRestaurants(fromLocation: locationManager.location, withText: text)
         }
-        
-        let coordinates = location.coordinate
-        
-        // Subscribe to the search publisher and notify observers
-        PlacesAPI().search(withText: text, latitude: "\(coordinates.latitude)", longitude: "\(coordinates.longitude)")
-            .receive(on: DispatchQueue.main)
-            .sink { _  in
-            } receiveValue: { [weak self] restaurants in
-                self?.restaurants = restaurants
-            }
-            .store(in: &cancellables)
-    }
+   }
     
     private func showAlert(title: String = "Uh Oh", message: String? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
-    override var shouldAutorotate: Bool {
-        false
-    }
 }
 
-// MARK: - LocationManagerDelegate
 extension RestaurantViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .notDetermined: manager.requestWhenInUseAuthorization()
         case .authorizedWhenInUse:
-            manager.startUpdatingLocation()
             fetchNearbyRestaurants()
-            authorizationDenied = false
-            manager.stopUpdatingLocation()
         default:
-            authorizationDenied = true
-            restaurants = []
+            showAlert(message: "Please check your location permissions in Settings.")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        authorizationDenied = true
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.stopUpdatingLocation()
+        showAlert(title: "Location Update Error", message: error.localizedDescription)
     }
 }
 
-// MARK: - UISearchBarDelegate
 extension RestaurantViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText
@@ -188,46 +170,5 @@ extension RestaurantViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-    }
-}
-
-
-// MARK: - Observers
-private extension RestaurantViewController {
-    struct Observation {
-        weak var observer: RestaurantSearchObserver?
-    }
-    
-    func notifyObservers() {
-        for (id, observation) in observations {
-            guard let observer = observation.observer else {
-                observations.removeValue(forKey: id)
-                continue
-            }
-            
-            observer.didReceiveRestaurants(restaurants)
-            observer.didNotReceiveResults(forText: searchText)
-            observer.locationAccessDenied(authorizationDenied)
-        }
-    }
-}
-
-protocol RestaurantSearchObserver: AnyObject {
-    func didReceiveRestaurants(_ restaurants: [Restaurant])
-    func didNotReceiveResults(forText text: String)
-    func locationAccessDenied(_ isDenied: Bool)
-}
-
-// Optional Methods
-extension RestaurantSearchObserver {
-    func didReceiveRestaurants(_ restaurants: [Restaurant]) {}
-    func didNotReceiveResults(forText text: String) {}
-    func locationAccessDenied(_ isDenied: Bool) {}
-}
-
-extension RestaurantViewController {
-    func addObserver(_ observer: RestaurantSearchObserver) {
-        let id = ObjectIdentifier(observer)
-        observations[id] = Observation(observer: observer)
     }
 }

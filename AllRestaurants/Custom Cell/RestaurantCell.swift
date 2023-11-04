@@ -19,13 +19,16 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var priceLevelLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     
-    func configure(with model: RestaurantViewModel) {
+    func configure(with model: RestaurantCellViewModel) {
         nameLabel.text = model.name
         placeImageView.image = UIImage(named: "resty")!
         reviewCountLabel.text = "(\(model.reviewCount.abbreviated))"
         priceLevelLabel.text = "\(model.priceLevel)"
         statusLabel.text = model.distance
-        placeImageView.load(url: Endpoint.photo(model.photoId).url, placeholder: nil, cache: nil)
+        Task {
+            try await placeImageView.load(url: GMEndpoint.photo(model.photoId).url, placeholder: nil)
+        }
+        
         placeImageView.layer.cornerRadius = placeImageView.frame.width / 2
         
         let controller = UIHostingController(rootView: StarRating(rating: model.starRating))

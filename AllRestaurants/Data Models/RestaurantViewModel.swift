@@ -5,46 +5,51 @@
 //  Created by Chris Rene on 12/5/21.
 //
 
-import Foundation
 import CoreLocation
-import CoreGraphics
+import Foundation
+import MapKit
+import SwiftUI
 
-class RestaurantViewModel {
+typealias Location = CLLocationCoordinate2D
+
+@MainActor
+public class RestaurantViewModel: ObservableObject {
     
-    let name: String
-    let priceLevel: String
-    let starRating: Double
-    let reviewCount: Int
-    let photoId: String
+    @Published var position: MapCameraPosition = .automatic
+    @Published var restaurants: [Restaurant] = []
+    @Published var error: GMError?
+    @Published var isFetching: Bool = false // do I need this??
     
-    private let restaurant: Restaurant
+    private let client = GMClient()
+    private let geocoder = CLGeocoder()
     
-    lazy var distance: String = {
-        return String(format: "%.1f", distanceInMiles(from: restaurant.coordinate)) + "mi"
-    }()
-    
-    init(restaurant: Restaurant) {
-        self.restaurant = restaurant
+    func fetchNearbyRestaurants(fromLocation location: CLLocation?) async throws {
+        guard let location else {
+            error = GMError.locationNotFound
+            return
+        }
         
-        name = restaurant.name
-        priceLevel = restaurant.priceLevel == 0 ? "$" : String(repeating: "$", count: restaurant.priceLevel)
-        starRating = restaurant.rating
-        reviewCount = restaurant.userRatingsTotal
-        photoId = restaurant.photoId
+        isFetching = true
+        self.restaurants = try await client.getNearbyRestaurants(fromLocation: location.coordinate)
+        if let restaurant = restaurants.first {
+            self.updateMapPosition(location: CLLocation(latitude: restaurant.location.lat, longitude: restaurant.location.lng))
+        }
     }
     
-    func distanceInMiles(from coordinate: CLLocationCoordinate2D) -> Double {
-        guard let currentLocation = CLLocationManager().location else { return 0.0 }
-        return distance(from: currentLocation.coordinate, coordinate2: coordinate)
+    func searchForRestaurants(fromLocation location: CLLocation?, withText text: String) async throws {
+        guard let location else {
+            error = GMError.locationNotFound
+            return
+        }
+        
+        isFetching = true
+        self.restaurants = try await client.searchForRestaurants(fromLocation: location.coordinate, withText: text)
+        if let restaurant = restaurants.first {
+            self.updateMapPosition(location: CLLocation(latitude: restaurant.location.lat, longitude: restaurant.location.lng))
+        }
     }
     
-    // Modified helper method from StackOverflow
-    func distance(from coordinate1: CLLocationCoordinate2D, coordinate2: CLLocationCoordinate2D) -> Double {
-        let theta = coordinate1.longitude - coordinate2.longitude
-        var distance = sin(coordinate1.latitude.degreesToRadians) * sin(coordinate2.latitude.degreesToRadians) + cos(coordinate1.latitude.degreesToRadians) * cos(coordinate2.latitude.degreesToRadians) * cos(theta.degreesToRadians)
-        distance = acos(distance)
-        distance = distance.radiansToDegrees
-        distance = distance * 60 * 1.1515
-        return distance
+    private func updateMapPosition(location: CLLocation) {
+        position = .region(MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)))
     }
 }

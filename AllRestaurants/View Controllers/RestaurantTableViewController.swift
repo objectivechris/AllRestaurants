@@ -12,10 +12,6 @@ import SwiftUI
 private let cellIdentifier = "RestaurantCell"
 
 class RestaurantTableViewController: UIViewController {
-
-    enum Section: CaseIterable {
-        case restaurants
-    }
     
     private enum BackgroundState {
         case noLocation
@@ -32,14 +28,17 @@ class RestaurantTableViewController: UIViewController {
     }
     
     @IBOutlet private weak var tableView: UITableView!
-    
-    // Diffable data 
-    private var dataSource: UITableViewDiffableDataSource<Section, Restaurant>?
-    private(set) var restaurants = [Restaurant]() {
+        
+    private var dataSource: UITableViewDiffableDataSource<Int, Restaurant>?
+    var restaurants = [Restaurant]() {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.reloadData()
-            }
+            var snapshot = NSDiffableDataSourceSnapshot<Int, Restaurant>()
+            snapshot.appendSections([0])
+            snapshot.appendItems([])
+            dataSource?.apply(snapshot, animatingDifferences: true)
+            
+            snapshot.appendItems(restaurants)
+            dataSource?.apply(snapshot, animatingDifferences: true)
         }
     }
     
@@ -47,9 +46,11 @@ class RestaurantTableViewController: UIViewController {
         super.viewDidLoad()
 
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        tableView.keyboardDismissMode = .onDrag
-        
-        configureDataSource()
+        dataSource = UITableViewDiffableDataSource<Int, Restaurant>(tableView: tableView) { tableView, indexPath, restaurant in
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantCell
+            cell.configure(with: RestaurantCellViewModel(restaurant: restaurant))
+            return cell
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,47 +58,27 @@ class RestaurantTableViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
     }
     
-    private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Section, Restaurant>(tableView: tableView) { tableView, indexPath, restaurant in
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantCell
-            cell.configure(with: RestaurantViewModel(restaurant: restaurant))
-            return cell
-        }
-        
-        dataSource?.defaultRowAnimation = .fade
-        tableView.dataSource = dataSource
-    }
-    
-    private func reloadData() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
-        snapshot.appendSections([.restaurants])
-        snapshot.appendItems(restaurants, toSection: .restaurants)
-        dataSource?.apply(snapshot, animatingDifferences: true)
-    }
-    
     private func configureBackground(forState state: BackgroundState) {
         tableView.backgroundView = state.backgroundView
     }
 }
 
-// MARK: - RestaurantSearchObserver
-extension RestaurantTableViewController: RestaurantSearchObserver {
-    
-    func didReceiveRestaurants(_ restaurants: [Restaurant]) {
-        self.restaurants = restaurants
-    }
-    
-    func didNotReceiveResults(forText text: String) {
-        guard CLLocationManager().authorizationStatus != .notDetermined else { return }
-        guard restaurants.isEmpty else {
-            tableView.backgroundView = nil
-            return
+extension RestaurantTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let restaurant = restaurants[indexPath.row]
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .white
+        let nav = UINavigationController(rootViewController: viewController)
+        viewController.title = "\(restaurant.name)"
+        if let sheet = nav.sheetPresentationController {
+            let fraction = UISheetPresentationController.Detent.custom { context in
+                self.view.frame.height * 0.25
+            }
+            sheet.detents = [fraction]
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 20
         }
-        configureBackground(forState: .noResults(text))
-    }
-    
-    func locationAccessDenied(_ isDenied: Bool) {
-        guard isDenied else { return }
-        configureBackground(forState: .noLocation)
+        
+        self.present(nav, animated: true, completion: nil)
     }
 }
