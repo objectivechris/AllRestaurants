@@ -66,12 +66,23 @@ extension Restaurant {
     }
     
     static func example() -> [Restaurant] {
-        return [Restaurant(name: "AA",
-                                     priceLevel: 23,
-                                     rating: 4,
-                                     userRatingsTotal: 3,
-                                     location: Restaurant.Coordinates(lat: 33.9196, lng: -84.4851),
-                                     photoId: "",
-                                     address: "")]        
+        return [Restaurant(name: "Maggiano's Little Italy",priceLevel: 2,
+                           rating: 4.3,
+                           userRatingsTotal: 3571,
+                           location: Restaurant.Coordinates(lat: 33.8807, lng: -84.4677),
+                           photoId: "",
+                           address: ""), Restaurant(name: "Ray's on the River",
+                                                    priceLevel: 3,
+                                                    rating: 4.7,
+                                                    userRatingsTotal: 8997,
+                                                    location: Restaurant.Coordinates(lat: 33.9004, lng: -84.4408),
+                                                    photoId: "",
+                                                    address: ""), Restaurant(name: "Bowlero Marietta",
+                                                                             priceLevel: 0,
+                                                                             rating: 4.3,
+                                                                             userRatingsTotal: 3,
+                                                                             location: Restaurant.Coordinates(lat: 33.9239, lng: -84.4738),
+                                                                             photoId: "",
+                                                                             address: "")]
     }
 }

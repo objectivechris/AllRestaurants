@@ -11,17 +11,15 @@ import SwiftUI
 struct RestaurantMapView: View {
     
     @StateObject var viewModel: RestaurantViewModel
-    @State private var selectedTag: Int?
+    @State private var selectedRestaurant: Restaurant?
     
     var body: some View {
         VStack {
-            Map(position: $viewModel.position, interactionModes: .all) {
-                ForEach(viewModel.restaurants) { restaurant in
-                    Marker(restaurant.name, coordinate: restaurant.coordinate)
+            Map(position: $viewModel.position, interactionModes: .all, selection: $selectedRestaurant) {
+                ForEach(viewModel.restaurants, id: \.self) { restaurant in
+                    Marker(restaurant.name, systemImage: "fork.knife", coordinate: restaurant.coordinate)
                         .tint(Color.allTrailsGreen)
                 }
-                UserAnnotation()
-                
             }
         }
         .gesture(DragGesture().onChanged { _ in
@@ -31,6 +29,10 @@ struct RestaurantMapView: View {
             MapUserLocationButton()
                 .buttonBorderShape(.circle)
             MapCompass()
+            MapScaleView()
+        }
+        .onChange(of: selectedRestaurant) {
+            print(selectedRestaurant)
         }
         .tint(Color.blue)
         .ignoresSafeArea(edges: .bottom)
@@ -38,5 +40,5 @@ struct RestaurantMapView: View {
 }
 
 #Preview {
-    RestaurantMapView(viewModel: RestaurantViewModel())
+    RestaurantMapView(viewModel: RestaurantViewModel.example())
 }

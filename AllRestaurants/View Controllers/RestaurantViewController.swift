@@ -156,7 +156,7 @@ class RestaurantViewController: UIViewController {
     private func showAlert(title: String = "Uh Oh", message: String? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        navigationController?.present(alert, animated: true, completion: nil)
     }
 }
 

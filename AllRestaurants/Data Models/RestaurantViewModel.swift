@@ -53,3 +53,11 @@ public class RestaurantViewModel: ObservableObject {
         position = .region(MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)))
     }
 }
+
+extension RestaurantViewModel {
+    static func example() -> RestaurantViewModel {
+        let vm = RestaurantViewModel()
+        vm.restaurants = Restaurant.example()
+        return vm
+    }
+}

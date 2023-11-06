@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D00018FC2AF2F0A700BB133E /* RestaurantMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00018FB2AF2F0A700BB133E /* RestaurantMapView.swift */; };
-		D01FBCAC2760DE7100F49161 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */; };
 		D02F3AEE2763F87E00B2CA66 /* NearbySearch.json in Sources */ = {isa = PBXBuildFile; fileRef = D02F3AED2763F87E00B2CA66 /* NearbySearch.json */; };
 		D02F3AF02763F8AE00B2CA66 /* TextSearch.json in Sources */ = {isa = PBXBuildFile; fileRef = D02F3AEF2763F8AE00B2CA66 /* TextSearch.json */; };
 		D02F3AF12763FC3100B2CA66 /* NearbySearch.json in Resources */ = {isa = PBXBuildFile; fileRef = D02F3AED2763F87E00B2CA66 /* NearbySearch.json */; };
@@ -56,7 +55,6 @@
 
 /* Begin PBXFileReference section */
 		D00018FB2AF2F0A700BB133E /* RestaurantMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMapView.swift; sourceTree = "<group>"; };
-		D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
 		D02F3AED2763F87E00B2CA66 /* NearbySearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NearbySearch.json; sourceTree = "<group>"; };
 		D02F3AEF2763F8AE00B2CA66 /* TextSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TextSearch.json; sourceTree = "<group>"; };
 		D02F3AF52764066700B2CA66 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				D06704BE275B379F002A3A9B /* Restaurant.swift */,
-				D01FBCAB2760DE7100F49161 /* RestaurantAnnotation.swift */,
 				D0D3A57F2AEF14260000FDC0 /* RestaurantViewModel.swift */,
 				D0AFEA59275D574D00231FDA /* RestaurantCellViewModel.swift */,
 				D0D95B65275EC43E00EA60C6 /* Type+Extensions.swift */,
@@ -361,7 +358,6 @@
 				D02F3AEE2763F87E00B2CA66 /* NearbySearch.json in Sources */,
 				D0670481275B21AC002A3A9B /* AppDelegate.swift in Sources */,
 				D03D469E275F960900903545 /* NoLocationAccess.swift in Sources */,
-				D01FBCAC2760DE7100F49161 /* RestaurantAnnotation.swift in Sources */,
 				D0670483275B21AC002A3A9B /* SceneDelegate.swift in Sources */,
 				D0928CA02AF0B4B5001AEBC8 /* ToggleButton.swift in Sources */,
 				D0D3A57C2AEF10570000FDC0 /* GMError.swift in Sources */,
