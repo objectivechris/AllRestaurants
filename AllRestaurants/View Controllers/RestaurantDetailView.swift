@@ -29,6 +29,7 @@ struct RestaurantDetailView: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                         Text(viewModel.isOpen ? "Open" : "Closed")
+                            .font(.callout)
                             .foregroundStyle(viewModel.isOpen ? .green : .red)
                     }
                     Spacer()
@@ -37,7 +38,7 @@ struct RestaurantDetailView: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                         Text(viewModel.reviewCount.abbreviated)
-                            .foregroundStyle(.black)
+                            .font(.callout)
                     }
                     
                     Spacer()
@@ -46,6 +47,7 @@ struct RestaurantDetailView: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                         Text("\(viewModel.priceLevel)")
+                            .font(.callout)
                     }
                     
                     Spacer()
@@ -54,6 +56,7 @@ struct RestaurantDetailView: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                         Text(viewModel.distance)
+                            .font(.callout)
                     }
                 }
                 .padding(.horizontal, 20)

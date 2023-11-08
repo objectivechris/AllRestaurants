@@ -66,12 +66,12 @@ extension RestaurantTableViewController: UITableViewDelegate {
         
         if let sheet = hostingController.sheetPresentationController {
             let fraction = UISheetPresentationController.Detent.custom { context in
-                self.view.frame.height * 0.25
+                return 250
             }
             sheet.detents = [fraction]
         }
         
-        self.present(hostingController, animated: true, completion: nil)
+        present(hostingController, animated: true, completion: nil)
     }
 }
 

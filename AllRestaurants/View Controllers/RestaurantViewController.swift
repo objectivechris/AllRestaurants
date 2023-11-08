@@ -29,6 +29,7 @@ class RestaurantViewController: UIViewController {
         let search = UISearchController(searchResultsController: nil)
         search.searchBar.delegate = self
         search.searchBar.searchTextField.backgroundColor = .white
+        search.searchBar.searchTextField.tintColor = .allTrailsGreen
         search.searchBar.placeholder = "Search for a restaurant"
         return search
     }()

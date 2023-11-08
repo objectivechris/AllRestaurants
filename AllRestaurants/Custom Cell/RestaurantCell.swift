@@ -21,7 +21,6 @@ class RestaurantCell: UITableViewCell {
     
     func configure(with model: RestaurantCellViewModel) {
         nameLabel.text = model.name
-        placeImageView.image = UIImage(named: "resty")!
         reviewCountLabel.text = "(\(model.reviewCount.abbreviated))"
         priceLevelLabel.text = "\(model.priceLevel)"
         statusLabel.text = model.distance
@@ -42,8 +41,8 @@ class RestaurantCell: UITableViewCell {
         
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
-//        containerView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-//        containerView.layer.borderWidth = 1.0
+        containerView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+        containerView.layer.borderWidth = 1.0
         
         layoutIfNeeded()
     }
