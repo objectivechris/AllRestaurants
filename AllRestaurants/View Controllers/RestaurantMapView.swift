@@ -88,6 +88,7 @@ struct RestaurantMapView: View {
             )
             
             position = .region(.init(center: center, span: span))
+            selectedRestaurant = nil
         }
     }
 }

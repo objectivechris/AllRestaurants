@@ -63,19 +63,16 @@ class RestaurantTableViewController: UIViewController {
 extension RestaurantTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurant = data.restaurants[indexPath.row]
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .white
-        let nav = UINavigationController(rootViewController: viewController)
-        viewController.title = "\(restaurant.name)"
-        if let sheet = nav.sheetPresentationController {
+        let detailView = RestaurantDetailView(viewModel: .init(restaurant: restaurant))
+        let hostingController = UIHostingController(rootView: detailView)
+        
+        if let sheet = hostingController.sheetPresentationController {
             let fraction = UISheetPresentationController.Detent.custom { context in
                 self.view.frame.height * 0.25
             }
             sheet.detents = [fraction]
-            sheet.prefersGrabberVisible = true
-            sheet.preferredCornerRadius = 20
         }
         
-        self.present(nav, animated: true, completion: nil)
+        self.present(hostingController, animated: true, completion: nil)
     }
 }

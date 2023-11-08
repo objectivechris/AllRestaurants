@@ -29,6 +29,7 @@ class RestaurantViewController: UIViewController {
         let search = UISearchController(searchResultsController: nil)
         search.searchBar.delegate = self
         search.searchBar.searchTextField.backgroundColor = .white
+        search.searchBar.placeholder = "Search for a restaurant"
         return search
     }()
     
@@ -173,7 +174,7 @@ extension RestaurantViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        showAlert(title: "Location Update Error", message: (error as? GMError)?.errorDescription ?? error.localizedDescription)
+        showAlert(title: "Location Update Error", message: error.localizedDescription)
     }
 }
 

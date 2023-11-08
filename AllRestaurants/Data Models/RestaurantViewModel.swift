@@ -30,7 +30,11 @@ public class RestaurantViewModel: ObservableObject {
         
         isFetching = true
         self.restaurants = []
-        self.restaurants = try await client.getNearbyRestaurants(fromLocation: location.coordinate)
+        self.restaurants = try await client.getNearbyRestaurants(fromLocation: location.coordinate).sorted { (restaurant1, restaurant2) -> Bool in
+            let location1 = CLLocation(latitude: restaurant1.location.lat, longitude: restaurant1.location.lng)
+            let location2 = CLLocation(latitude: restaurant2.location.lat, longitude: restaurant2.location.lng)
+            return location1.distance(from: location) < location2.distance(from: location)
+        }
     }
     
     func searchForRestaurants(fromLocation location: CLLocation?, withText text: String) async throws {
