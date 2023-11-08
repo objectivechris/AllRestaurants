@@ -23,6 +23,8 @@
 		D067049B275B21AD002A3A9B /* RestaurantsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067049A275B21AD002A3A9B /* RestaurantsViewModelTests.swift */; };
 		D06704BB275B27F9002A3A9B /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06704BA275B27F9002A3A9B /* StarRating.swift */; };
 		D06704BF275B379F002A3A9B /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06704BE275B379F002A3A9B /* Restaurant.swift */; };
+		D08C632C2AF8AE5C000C7310 /* RestaurantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08C632B2AF8AE5C000C7310 /* RestaurantDetailView.swift */; };
+		D08C634C2AF9B29C000C7310 /* RestaurantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08C634B2AF9B29C000C7310 /* RestaurantInfoView.swift */; };
 		D0928CA02AF0B4B5001AEBC8 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0928C9F2AF0B4B5001AEBC8 /* ToggleButton.swift */; };
 		D09AE981275FB2EA00AB118B /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AE980275FB2EA00AB118B /* ButtonStyle.swift */; };
 		D09AE9A3275FF13500AB118B /* RestaurantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AE9A2275FF13500AB118B /* RestaurantTableViewController.swift */; };
@@ -73,6 +75,8 @@
 		D06704A0275B21AD002A3A9B /* AllRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D06704BA275B27F9002A3A9B /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
 		D06704BE275B379F002A3A9B /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		D08C632B2AF8AE5C000C7310 /* RestaurantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailView.swift; sourceTree = "<group>"; };
+		D08C634B2AF9B29C000C7310 /* RestaurantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoView.swift; sourceTree = "<group>"; };
 		D0928C9F2AF0B4B5001AEBC8 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		D09AE980275FB2EA00AB118B /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		D09AE9A2275FF13500AB118B /* RestaurantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 				D0670484275B21AC002A3A9B /* RestaurantViewController.swift */,
 				D09AE9A2275FF13500AB118B /* RestaurantTableViewController.swift */,
 				D00018FB2AF2F0A700BB133E /* RestaurantMapView.swift */,
+				D08C632B2AF8AE5C000C7310 /* RestaurantDetailView.swift */,
+				D08C634B2AF9B29C000C7310 /* RestaurantInfoView.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -354,12 +360,14 @@
 				D0D3A57A2AEF104D0000FDC0 /* GMClient.swift in Sources */,
 				D09AE981275FB2EA00AB118B /* ButtonStyle.swift in Sources */,
 				D06704BB275B27F9002A3A9B /* StarRating.swift in Sources */,
+				D08C632C2AF8AE5C000C7310 /* RestaurantDetailView.swift in Sources */,
 				D056F11527623C4200ACC359 /* NoResultsFound.swift in Sources */,
 				D02F3AEE2763F87E00B2CA66 /* NearbySearch.json in Sources */,
 				D0670481275B21AC002A3A9B /* AppDelegate.swift in Sources */,
 				D03D469E275F960900903545 /* NoLocationAccess.swift in Sources */,
 				D0670483275B21AC002A3A9B /* SceneDelegate.swift in Sources */,
 				D0928CA02AF0B4B5001AEBC8 /* ToggleButton.swift in Sources */,
+				D08C634C2AF9B29C000C7310 /* RestaurantInfoView.swift in Sources */,
 				D0D3A57C2AEF10570000FDC0 /* GMError.swift in Sources */,
 				D0D95B66275EC43E00EA60C6 /* Type+Extensions.swift in Sources */,
 				D0D3A5802AEF14260000FDC0 /* RestaurantViewModel.swift in Sources */,

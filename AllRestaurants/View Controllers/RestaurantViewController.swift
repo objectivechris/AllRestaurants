@@ -97,7 +97,7 @@ class RestaurantViewController: UIViewController {
             .removeDuplicates()
             .compactMap({ $0 })
             .sink { [weak self] query in
-                guard let self = self else { return }
+                guard let self else { return }
                 if query.isEmpty {
                     self.fetchNearbyRestaurants()
                 } else {
@@ -109,8 +109,9 @@ class RestaurantViewController: UIViewController {
         viewModel.$restaurants
             .receive(on: RunLoop.main)
             .sink { [weak self] rest in
-                self?.tableViewController.restaurants = rest
-                self?.title = "\(rest.count) results found"
+                guard let self else { return }
+                self.tableViewController.data = (rest, self.locationManager.location?.coordinate)
+                self.title = "\(rest.count) results found"
             }
             .store(in: &subscriptions)
     }
@@ -183,5 +184,10 @@ extension RestaurantViewController: UISearchControllerDelegate, UISearchBarDeleg
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, !text.isEmpty else { return }
+        fetchNearbyRestaurants()
     }
 }

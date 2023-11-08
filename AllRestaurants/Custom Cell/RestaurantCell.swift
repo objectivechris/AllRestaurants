@@ -42,8 +42,8 @@ class RestaurantCell: UITableViewCell {
         
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
-        containerView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-        containerView.layer.borderWidth = 1.0
+//        containerView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+//        containerView.layer.borderWidth = 1.0
         
         layoutIfNeeded()
     }

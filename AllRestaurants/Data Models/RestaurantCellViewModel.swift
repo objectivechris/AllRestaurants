@@ -7,7 +7,6 @@
 
 import Foundation
 import CoreLocation
-import CoreGraphics
 
 class RestaurantCellViewModel {
     
@@ -16,35 +15,47 @@ class RestaurantCellViewModel {
     let starRating: Double
     let reviewCount: Int
     let photoId: String
+    let isOpen: Bool
     
-    private let restaurant: Restaurant
+    let restaurant: Restaurant
+    let userLocation: Location
     
     lazy var distance: String = {
-        return String(format: "%.1f", distanceInMiles(from: restaurant.coordinate)) + "mi"
+        return distanceInLocalizedUnit(from: userLocation, to: restaurant.coordinate)
     }()
     
-    init(restaurant: Restaurant) {
+    init(restaurant: Restaurant, location: Location? = nil) {
         self.restaurant = restaurant
+        self.userLocation = location ?? .init()
         
         name = restaurant.name
         priceLevel = restaurant.priceLevel == 0 ? "$" : String(repeating: "$", count: restaurant.priceLevel)
         starRating = restaurant.rating
         reviewCount = restaurant.userRatingsTotal
         photoId = restaurant.photoId
+        isOpen = restaurant.isOpen 
     }
     
-    func distanceInMiles(from coordinate: CLLocationCoordinate2D) -> Double {
-        guard let currentLocation = CLLocationManager().location else { return 0.0 }
-        return distance(from: currentLocation.coordinate, coordinate2: coordinate)
-    }
-    
-    // Modified helper method from StackOverflow
-    func distance(from coordinate1: CLLocationCoordinate2D, coordinate2: CLLocationCoordinate2D) -> Double {
-        let theta = coordinate1.longitude - coordinate2.longitude
-        var distance = sin(coordinate1.latitude.degreesToRadians) * sin(coordinate2.latitude.degreesToRadians) + cos(coordinate1.latitude.degreesToRadians) * cos(coordinate2.latitude.degreesToRadians) * cos(theta.degreesToRadians)
-        distance = acos(distance)
-        distance = distance.radiansToDegrees
-        distance = distance * 60 * 1.1515
-        return distance
+    private func distanceInLocalizedUnit(from currentLocation: CLLocationCoordinate2D, to destinationLocation: CLLocationCoordinate2D) -> String {
+        let currentCoordinate = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        let destinationCoordinate = CLLocation(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)
+
+        let distanceInMeters = currentCoordinate.distance(from: destinationCoordinate)
+
+        let measurement = Measurement(value: distanceInMeters, unit: UnitLength.init(forLocale: .current))
+
+        let locale = Locale.current
+        let unit: UnitLength = (locale.measurementSystem == .metric) ? .kilometers : .miles
+
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 1
+
+        let measurementFormatter = MeasurementFormatter()
+        measurementFormatter.numberFormatter = numberFormatter
+        measurementFormatter.unitStyle = .medium
+        measurementFormatter.unitOptions = .providedUnit
+
+        return measurementFormatter.string(from: measurement.converted(to: unit))
     }
 }

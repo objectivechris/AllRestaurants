@@ -30,14 +30,11 @@ class RestaurantTableViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
         
     private var dataSource: UITableViewDiffableDataSource<Int, Restaurant>?
-    var restaurants = [Restaurant]() {
+    var data: (restaurants: [Restaurant], location: Location?) = ([], nil) {
         didSet {
             var snapshot = NSDiffableDataSourceSnapshot<Int, Restaurant>()
             snapshot.appendSections([0])
-            snapshot.appendItems([])
-            dataSource?.apply(snapshot, animatingDifferences: true)
-            
-            snapshot.appendItems(restaurants)
+            snapshot.appendItems(data.restaurants)
             dataSource?.apply(snapshot, animatingDifferences: true)
         }
     }
@@ -46,9 +43,9 @@ class RestaurantTableViewController: UIViewController {
         super.viewDidLoad()
 
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        dataSource = UITableViewDiffableDataSource<Int, Restaurant>(tableView: tableView) { tableView, indexPath, restaurant in
+        dataSource = UITableViewDiffableDataSource<Int, Restaurant>(tableView: tableView) { [weak self] tableView, indexPath, restaurant in
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantCell
-            cell.configure(with: RestaurantCellViewModel(restaurant: restaurant))
+            cell.configure(with: RestaurantCellViewModel(restaurant: restaurant, location: self?.data.location))
             return cell
         }
     }
@@ -65,7 +62,7 @@ class RestaurantTableViewController: UIViewController {
 
 extension RestaurantTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let restaurant = restaurants[indexPath.row]
+        let restaurant = data.restaurants[indexPath.row]
         let viewController = UIViewController()
         viewController.view.backgroundColor = .white
         let nav = UINavigationController(rootViewController: viewController)
