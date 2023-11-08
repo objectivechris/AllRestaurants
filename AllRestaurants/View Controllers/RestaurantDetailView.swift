@@ -106,5 +106,5 @@ struct RestaurantDetailView: View {
 }
 
 #Preview {
-    RestaurantDetailView(viewModel: RestaurantCellViewModel(restaurant: Restaurant.example().first!, location: .init(latitude: 33.8995, longitude: -84.4617)))
+    RestaurantDetailView(viewModel: RestaurantCellViewModel(restaurant: Restaurant.example().first!))
 }

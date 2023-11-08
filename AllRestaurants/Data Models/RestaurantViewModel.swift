@@ -17,7 +17,7 @@ public class RestaurantViewModel: ObservableObject {
     
     @Published var restaurants: [Restaurant] = []
     @Published var error: GMError?
-    @Published var isFetching: Bool = false // do I need this??
+    @Published var isFetching: Bool = false
     
     private let client = GMClient()
     private let geocoder = CLGeocoder()
@@ -35,6 +35,7 @@ public class RestaurantViewModel: ObservableObject {
             let location2 = CLLocation(latitude: restaurant2.location.lat, longitude: restaurant2.location.lng)
             return location1.distance(from: location) < location2.distance(from: location)
         }
+        isFetching = false
     }
     
     func searchForRestaurants(fromLocation location: CLLocation?, withText text: String) async throws {
@@ -46,6 +47,7 @@ public class RestaurantViewModel: ObservableObject {
         isFetching = true
         self.restaurants = []
         self.restaurants = try await client.searchForRestaurants(fromLocation: location.coordinate, withText: text)
+        isFetching = false
     }
 }
 

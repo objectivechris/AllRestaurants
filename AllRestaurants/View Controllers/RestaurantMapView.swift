@@ -42,7 +42,7 @@ struct RestaurantMapView: View {
             setRegionThatFitsAnnotations()
         }
         .sheet(item: $selectedRestaurant) { rest in
-            RestaurantDetailView(viewModel: .init(restaurant: rest, location: locationManager.location?.coordinate), route: route)
+            RestaurantDetailView(viewModel: .init(restaurant: rest), route: route)
                 .presentationDetents([.height(250)])
                 .presentationBackgroundInteraction(.enabled(upThrough: .height(250)))
         }

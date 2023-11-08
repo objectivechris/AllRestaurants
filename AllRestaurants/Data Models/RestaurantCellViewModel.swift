@@ -18,22 +18,20 @@ class RestaurantCellViewModel {
     let isOpen: Bool
     
     let restaurant: Restaurant
-    let userLocation: Location
     
     lazy var distance: String = {
-        return distanceInLocalizedUnit(from: userLocation, to: restaurant.coordinate)
+        return distanceInLocalizedUnit(from: CLLocationManager().location?.coordinate ?? .init(), to: restaurant.coordinate)
     }()
     
-    init(restaurant: Restaurant, location: Location? = nil) {
+    init(restaurant: Restaurant) {
         self.restaurant = restaurant
-        self.userLocation = location ?? .init()
         
         name = restaurant.name
         priceLevel = restaurant.priceLevel == 0 ? "$" : String(repeating: "$", count: restaurant.priceLevel)
         starRating = restaurant.rating
         reviewCount = restaurant.userRatingsTotal
         photoId = restaurant.photoId
-        isOpen = restaurant.isOpen 
+        isOpen = restaurant.isOpen
     }
     
     private func distanceInLocalizedUnit(from currentLocation: CLLocationCoordinate2D, to destinationLocation: CLLocationCoordinate2D) -> String {

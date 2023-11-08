@@ -13,29 +13,13 @@ private let cellIdentifier = "RestaurantCell"
 
 class RestaurantTableViewController: UIViewController {
     
-    private enum BackgroundState {
-        case noLocation
-        case noResults(String)
-        
-        var backgroundView: UIView {
-            switch self {
-            case .noLocation:
-                return UIHostingController(rootView: NoLocationAccess()).view
-            case .noResults(let query):
-                return UIHostingController(rootView: NoResultsFound(text: query)).view
-            }
-        }
-    }
-    
     @IBOutlet private weak var tableView: UITableView!
-        
+    
+    typealias RestaurantLoadingState = (restaurants: [Restaurant], isLoading: Bool)
     private var dataSource: UITableViewDiffableDataSource<Int, Restaurant>?
-    var data: (restaurants: [Restaurant], location: Location?) = ([], nil) {
+    var state: RestaurantLoadingState = ([], isLoading: true) {
         didSet {
-            var snapshot = NSDiffableDataSourceSnapshot<Int, Restaurant>()
-            snapshot.appendSections([0])
-            snapshot.appendItems(data.restaurants)
-            dataSource?.apply(snapshot, animatingDifferences: true)
+            updateUI(for: state)
         }
     }
     
@@ -43,9 +27,9 @@ class RestaurantTableViewController: UIViewController {
         super.viewDidLoad()
 
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        dataSource = UITableViewDiffableDataSource<Int, Restaurant>(tableView: tableView) { [weak self] tableView, indexPath, restaurant in
+        dataSource = UITableViewDiffableDataSource<Int, Restaurant>(tableView: tableView) { tableView, indexPath, restaurant in
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantCell
-            cell.configure(with: RestaurantCellViewModel(restaurant: restaurant, location: self?.data.location))
+            cell.configure(with: RestaurantCellViewModel(restaurant: restaurant))
             return cell
         }
     }
@@ -55,14 +39,28 @@ class RestaurantTableViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }
     
-    private func configureBackground(forState state: BackgroundState) {
-        tableView.backgroundView = state.backgroundView
+    private func updateUI(for state: RestaurantLoadingState) {
+        let (restaurants, isLoading) = state
+        
+        if isLoading {
+            configureBackground(forState: .loading)
+        } else if restaurants.isEmpty {
+            configureBackground(forState: .noResults)
+        } else {
+            tableView.backgroundView = nil
+        }
+        
+        // Update the data source snapshot regardless of loading state
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Restaurant>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(restaurants, toSection: 0)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
 extension RestaurantTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let restaurant = data.restaurants[indexPath.row]
+        let restaurant = state.restaurants[indexPath.row]
         let detailView = RestaurantDetailView(viewModel: .init(restaurant: restaurant))
         let hostingController = UIHostingController(rootView: detailView)
         
@@ -74,5 +72,30 @@ extension RestaurantTableViewController: UITableViewDelegate {
         }
         
         self.present(hostingController, animated: true, completion: nil)
+    }
+}
+
+extension RestaurantTableViewController {
+    private enum BackgroundState {
+        case loading
+        case success
+        case noResults
+        
+        var backgroundView: UIView? {
+            switch self {
+            case .loading:
+                let activityIndicator = UIActivityIndicatorView(style: .medium)
+                activityIndicator.startAnimating()
+                return activityIndicator
+            case .success:
+                return nil
+            case .noResults:
+                return UIHostingController(rootView: NoResultsFound()).view
+            }
+        }
+    }
+    
+    private func configureBackground(forState state: BackgroundState) {
+        tableView.backgroundView = state.backgroundView
     }
 }

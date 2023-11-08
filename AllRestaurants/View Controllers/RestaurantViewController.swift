@@ -111,7 +111,7 @@ class RestaurantViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] rest in
                 guard let self else { return }
-                self.tableViewController.data = (rest, self.locationManager.location?.coordinate)
+                self.tableViewController.state = (rest, self.viewModel.isFetching)
                 self.title = "\(rest.count) results found"
             }
             .store(in: &subscriptions)
@@ -166,7 +166,7 @@ extension RestaurantViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .notDetermined: manager.requestWhenInUseAuthorization()
-        case .authorizedWhenInUse:
+        case .authorizedWhenInUse, .authorizedAlways:
             fetchNearbyRestaurants()
         default:
             showAlert(message: "Please check your location permissions in Settings.")
