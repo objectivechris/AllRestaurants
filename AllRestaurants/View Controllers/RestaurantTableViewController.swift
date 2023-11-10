@@ -7,6 +7,7 @@
 
 import CoreLocation
 import UIKit
+import MapKit
 import SwiftUI
 
 private let cellIdentifier = "RestaurantCell"
@@ -16,12 +17,13 @@ class RestaurantTableViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     
     typealias RestaurantLoadingState = (restaurants: [Restaurant], isLoading: Bool)
-    private var dataSource: UITableViewDiffableDataSource<Int, Restaurant>?
     var state: RestaurantLoadingState = ([], isLoading: true) {
         didSet {
             updateUI(for: state)
         }
     }
+    
+    private var dataSource: UITableViewDiffableDataSource<Int, Restaurant>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,22 +58,50 @@ class RestaurantTableViewController: UIViewController {
         snapshot.appendItems(restaurants, toSection: 0)
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
+    
+    private func presentDetailView(forRestaurant restaurant: Restaurant) {
+        var detailView = RestaurantDetailView(viewModel: .init(restaurant: restaurant))
+        let hostingController = UIHostingController(rootView: detailView)
+        
+        if let sheet = hostingController.sheetPresentationController {
+            let customDetent = UISheetPresentationController.Detent.custom { _ in 250 }
+            sheet.detents = [customDetent]
+        }
+        
+        navigationController?.present(hostingController, animated: true)
+
+        Task {
+            do {
+                let route = try await calculateRoute(for: restaurant)
+                await MainActor.run {
+                    detailView.route = route
+                    hostingController.rootView = detailView
+                }
+            }
+        }
+    }
+    
+    private func calculateRoute(for restaurant: Restaurant) async throws -> MKRoute {
+        let request = MKDirections.Request()
+        request.source = .forCurrentLocation()
+        request.destination = MKMapItem(placemark: .init(coordinate: restaurant.coordinate))
+
+        let directions = MKDirections(request: request)
+
+        return try await withUnsafeThrowingContinuation { continuation in
+            directions.calculate { response, error in
+                if let route = response?.routes.first {
+                    continuation.resume(returning: route)
+                }
+            }
+        }
+    }
 }
 
 extension RestaurantTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurant = state.restaurants[indexPath.row]
-        let detailView = RestaurantDetailView(viewModel: .init(restaurant: restaurant))
-        let hostingController = UIHostingController(rootView: detailView)
-        
-        if let sheet = hostingController.sheetPresentationController {
-            let fraction = UISheetPresentationController.Detent.custom { context in
-                return 250
-            }
-            sheet.detents = [fraction]
-        }
-        
-        present(hostingController, animated: true, completion: nil)
+        presentDetailView(forRestaurant: restaurant)
     }
 }
 

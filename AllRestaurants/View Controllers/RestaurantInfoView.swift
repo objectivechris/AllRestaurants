@@ -57,7 +57,9 @@ struct RestaurantInfoView: View {
     }
     
     private func openRestaurantInMaps() {
-        MKMapItem(placemark: .init(coordinate: selectedRestaurant.coordinate)).openInMaps()
+        var mapItem = MKMapItem(placemark: .init(coordinate: selectedRestaurant.coordinate))
+        mapItem.name = selectedRestaurant.name
+        mapItem.openInMaps()
     }
 }
 

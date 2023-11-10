@@ -39,8 +39,7 @@ class RestaurantCellViewModel {
         let destinationCoordinate = CLLocation(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)
 
         let distanceInMeters = currentCoordinate.distance(from: destinationCoordinate)
-
-        let measurement = Measurement(value: distanceInMeters, unit: UnitLength.init(forLocale: .current))
+        let measurement = Measurement(value: distanceInMeters, unit: UnitLength.meters)
 
         let locale = Locale.current
         let unit: UnitLength = (locale.measurementSystem == .metric) ? .kilometers : .miles
