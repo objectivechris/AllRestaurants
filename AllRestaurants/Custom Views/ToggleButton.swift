@@ -24,7 +24,7 @@ struct ToggleButton: View {
         .foregroundColor(.white)
         .frame(width: 100, height: 42)
         .background(Color.allTrailsGreen)
-        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .clipShape(RoundedRectangle(cornerRadius: 5))
         .shadow(radius: 5)
         .ignoresSafeArea()
     }

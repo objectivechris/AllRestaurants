@@ -15,33 +15,24 @@ class RestaurantViewController: UIViewController {
     private lazy var tableViewController: RestaurantTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "RestaurantTableViewController") as! RestaurantTableViewController
-        self.addChildVC(viewController)
+        addChildVC(viewController)
         return viewController
     }()
     
     private lazy var mapViewController: UIHostingController = {
         let hostingController = UIHostingController(rootView: RestaurantMapView(viewModel: self.viewModel))
-        self.addChildVC(hostingController)
+        addChildVC(hostingController)
         return hostingController
     }()
     
     private lazy var searchController: UISearchController = {
         let search = UISearchController(searchResultsController: nil)
         search.searchBar.delegate = self
-        search.searchBar.searchTextField.backgroundColor = .white
-        search.searchBar.searchTextField.tintColor = .allTrailsGreen
-        search.searchBar.placeholder = "Search for a restaurant"
         return search
     }()
     
     private lazy var toggleButton: UIHostingController = {
         let button = UIHostingController(rootView: ToggleButton(style: self.style))
-        self.addChildVC(button)
-        button.view.backgroundColor = .clear
-        button.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleView)))
-        button.view.translatesAutoresizingMaskIntoConstraints = false
-        button.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        button.view.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -20).isActive = true
         return button
     }()
     
@@ -70,12 +61,11 @@ class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addChildVC(toggleButton)
-        setupBindings()
-        
         title = "Nearby Restaurants"
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        setupToggleButton()
+        setupSearchBar()
+        setupBindings()
         
         if locationManager.authorizationStatus == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
@@ -118,8 +108,22 @@ class RestaurantViewController: UIViewController {
             .store(in: &subscriptions)
     }
     
-    @objc private func toggleView() {
-        style.toggle()
+    private func setupToggleButton() {
+        addChildVC(toggleButton)
+        toggleButton.view.backgroundColor = .clear
+        toggleButton.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleView)))
+        toggleButton.view.translatesAutoresizingMaskIntoConstraints = false
+        toggleButton.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        toggleButton.view.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -20).isActive = true
+    }
+    
+    private func setupSearchBar() {
+        searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.searchBar.searchTextField.tintColor = .allTrailsGreen
+        searchController.searchBar.placeholder = "Search for a restaurant"
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func display(_ viewController: UIViewController) {
@@ -131,6 +135,10 @@ class RestaurantViewController: UIViewController {
         }
         
         addChildVC(viewController)
+    }
+    
+    @objc private func toggleView() {
+        style.toggle()
     }
     
     private func addChildVC(_ childVC: UIViewController) {
@@ -172,10 +180,6 @@ extension RestaurantViewController: CLLocationManagerDelegate {
         default:
             showAlert(message: "Please check your location permissions in Settings.")
         }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        showAlert(title: "Location Update Error", message: error.localizedDescription)
     }
 }
 
