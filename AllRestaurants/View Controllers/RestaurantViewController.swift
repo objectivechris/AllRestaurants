@@ -73,6 +73,7 @@ class RestaurantViewController: UIViewController {
         addChildVC(toggleButton)
         setupBindings()
         
+        title = "Nearby Restaurants"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
@@ -113,7 +114,6 @@ class RestaurantViewController: UIViewController {
             .sink { [weak self] rest in
                 guard let self else { return }
                 self.tableViewController.state = (rest, self.viewModel.isFetching)
-                self.title = "\(rest.count) results found"
             }
             .store(in: &subscriptions)
     }
