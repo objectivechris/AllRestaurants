@@ -32,7 +32,7 @@ class RestaurantViewController: UIViewController {
     }()
     
     private lazy var toggleButton: UIHostingController = {
-        let button = UIHostingController(rootView: ToggleButton(style: self.style))
+        let button = UIHostingController(rootView: ToggleButton(style: style))
         return button
     }()
     
