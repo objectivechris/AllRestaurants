@@ -65,6 +65,7 @@ struct RestaurantMapView: View {
         
         Task {
             let directions = MKDirections(request: request)
+            directions.cancel()
             let response = try? await directions.calculate()
             route = response?.routes.first
         }

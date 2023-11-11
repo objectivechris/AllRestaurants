@@ -57,7 +57,6 @@ class RestaurantViewController: UIViewController {
     }
     
     @Published private var searchText: String?
-    @Published private var restaurants: [Restaurant] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
