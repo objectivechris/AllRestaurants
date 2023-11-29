@@ -25,13 +25,13 @@ extension Int {
 
 extension UIImageView {
     // Download and cache place icons for later use
-    func load(url: URL, placeholder: UIImage?, cache: URLCache? = nil) async throws {
+    func load(url: URL, cache: URLCache? = nil) async throws {
         let cache = cache ?? URLCache.shared
         let request = URLRequest(url: url)
         if let data = cache.cachedResponse(for: request)?.data, let image = UIImage(data: data) {
             self.image = image
         } else {
-            self.image = placeholder
+            self.image = UIImage(named: "logo")
             let (data, response) = try await URLSession.shared.data(from: url)
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw GMError.requestFailed }
             let image = UIImage(data: data)

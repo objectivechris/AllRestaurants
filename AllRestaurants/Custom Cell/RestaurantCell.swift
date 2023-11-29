@@ -25,7 +25,7 @@ class RestaurantCell: UITableViewCell {
         priceLevelLabel.text = "\(model.priceLevel)"
         statusLabel.text = model.distance
         Task {
-            try await placeImageView.load(url: GMEndpoint.photo(model.photoId).url, placeholder: nil)
+            try await placeImageView.load(url: GMEndpoint.photo(model.photoId).url)
         }
         
         placeImageView.layer.cornerRadius = placeImageView.frame.width / 2

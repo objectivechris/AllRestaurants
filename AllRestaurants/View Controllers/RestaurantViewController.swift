@@ -180,6 +180,10 @@ extension RestaurantViewController: CLLocationManagerDelegate {
             showAlert(message: "Please check your location permissions in Settings.")
         }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        fetchNearbyRestaurants()
+    }
 }
 
 extension RestaurantViewController: UISearchControllerDelegate, UISearchBarDelegate {
