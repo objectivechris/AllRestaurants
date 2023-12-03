@@ -15,6 +15,7 @@ struct RestaurantMapView: View {
     @State private var locationManager = CLLocationManager()
     @State private var position: MapCameraPosition = .automatic
     @State private var route: MKRoute?
+    @State private var showDetail = false
     
     var body: some View {
         VStack {
@@ -36,15 +37,18 @@ struct RestaurantMapView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         })
         .onChange(of: selectedRestaurant) {
+            showDetail = selectedRestaurant != nil
             getDirections()
         }
         .onChange(of: viewModel.restaurants) {
             setRegionThatFitsAnnotations()
         }
-        .sheet(item: $selectedRestaurant) { rest in
-            RestaurantDetailView(viewModel: .init(restaurant: rest), route: route)
-                .presentationDetents([.height(250)])
-                .presentationBackgroundInteraction(.enabled(upThrough: .height(250)))
+        .sheet(isPresented: $showDetail) {
+            if let selectedRestaurant {
+                RestaurantDetailView(viewModel: .init(restaurant: selectedRestaurant), route: route)
+                    .presentationDetents([.height(250)])
+                    .presentationBackgroundInteraction(.enabled(upThrough: .height(250)))
+            }
         }
         .tint(Color.blue)
         .ignoresSafeArea(edges: .bottom)
